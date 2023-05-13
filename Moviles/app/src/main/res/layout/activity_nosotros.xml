@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondomenu"
+    tools:context=".Nosotros">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/transparent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="Bienvenidos a Plannert, la aplicación \nmóvil que te llevará a una galaxia llena de \ndiversión y entretenimiento. Somos un \nequipo de apasionados del espacio y la \ntecnología, y hemos creado esta \nbucketlist de entretenimiento para \nayudarte a descubrir experiencias únicas \ny emocionantes que te encantarán.
+\nEn Plannert, encontrarás una amplia \nvariedad de actividades para añadir a tu \nlista de cosas por hacer. Desde visitar \nmuseos de ciencia ficción hasta asistir a \nfestivales de música en la Luna, nuestra \nselección de experiencias te llevará a \ntravés de las estrellas para que disfrutes \nde aventuras increíbles en el espacio \nexterior.
+\nAdemás, hemos diseñado nuestra \naplicación móvil para que sea fácil de \nusar y agradable a la vista. Nuestra \ninterfaz tiene un estilo espacial y \ndivertido que te encantará, y nuestra \nplataforma te permitirá explorar todas las \nactividades que ofrecemos de una \nmanera intuitiva y sencilla.
+\nEn Plannert, creemos que todos deberían \ntener la oportunidad de experimentar la \nemoción y la maravilla del espacio, y \nestamos comprometidos a hacerlo \nrealidad. Por eso, estamos \nconstantemente actualizando nuestra \nselección de actividades y mejorando \nnuestra aplicación para ofrecerte una \nexperiencia única y memorable."/>
+
+
+</LinearLayout>

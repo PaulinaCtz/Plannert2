@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/iniciosesion"
+    tools:context=".Bienvenida2">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/icon"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:text="Registro"
+        android:fontFamily="@font/intermedium"/>
+    <ImageView
+        android:id="@+id/avatarUsuario"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/fulanito16"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/nombreUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/gris"
+        android:layout_gravity="center"
+        android:text="Nombre de usuario"
+        android:fontFamily="@font/intermedium"/>
+    <Button
+        android:id="@+id/btnCrearLista"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/custominicio"
+        android:text="Crear mi primera lista"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/intermedium"
+        />
+
+    <TextView
+        android:id="@+id/despues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="140dp"
+        android:textColor="@color/gris"
+        android:layout_gravity="center"
+        android:text="Más tarde"
+        android:fontFamily="@font/intermedium"/>
+
+</LinearLayout>

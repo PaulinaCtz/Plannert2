@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+android:background="@color/transparent"
+    android:orientation="vertical"
+    tools:context=".Categorias">
+
+    <RadioGroup
+        android:id="@+id/row1"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_gravity="center"
+        android:paddingHorizontal="10dp"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
+    <RadioButton
+        android:id="@+id/radioButtonCategorias1"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="3dp"
+        android:textAlignment="center"
+        android:button="@android:color/transparent"
+        android:drawableLeft="@drawable/circulomoradorecurso"
+        android:background="@drawable/formatocategoria"
+        android:layout_marginTop="10dp"
+        android:hint="Terror"
+        android:textColorHint="@color/gris"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="30dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:drawableLeft="@drawable/circulorojo"
+            android:background="@drawable/formatocategoria"
+            android:hint="Romance"
+
+            android:textColorHint="@color/gris"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="30dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:drawableLeft="@drawable/circuloamarillorecurso"
+            android:background="@drawable/formatocategoria"
+            android:hint="Acción"
+            android:textColorHint="@color/gris"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="30dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:drawableLeft="@drawable/circuloazulrecurso"
+            android:background="@drawable/formatocategoria"
+            android:hint="Sci - Fi"
+            android:textColorHint="@color/gris"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="30dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:drawableLeft="@drawable/circulolila"
+            android:background="@drawable/formatocategoria"
+            android:hint="Comedia"
+            android:textColorHint="@color/gris"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="30dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:drawableLeft="@drawable/circuloverderecurso"
+            android:background="@drawable/formatocategoria"
+            android:hint="Infantil"
+            android:textColorHint="@color/gris"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/fondomenu"
+            tools:context=".ListasNuevas">
+
+            <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/transparent" />
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/intermedium"
+            android:textColor="@color/white"
+            android:text="Crea una nueva lista" />
+
+            <TextView
+                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/gris"
+            android:text="¿Cómo quieres identificar tu lista?" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/gris"
+            android:text="Escoge un icono"
+            android:layout_marginLeft="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <RadioGroup
+                    android:id="@+id/RadioGroupIconos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:id="@+id/option1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/maskgroup"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="5dp"
+
+                        android:tag="icono1"
+                        android:textAlignment="center"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/option2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/maskgroupuno"
+                        android:textSize="16sp"
+                        android:tag="icono2"
+                        android:layout_marginRight="5dp"
+                        android:textAlignment="center"/>
+
+                    <RadioButton
+                        android:id="@+id/option3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/maskgroupdos"
+
+                        android:tag="icono3"
+                        android:textSize="16sp"
+                        android:layout_marginRight="5dp"
+                        android:textAlignment="center"/>
+
+                    <RadioButton
+                        android:id="@+id/option4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/maskgrouptres"
+
+                        android:tag="icono4"
+                        android:textSize="16sp"
+                        android:layout_marginRight="10dp"
+                        android:textAlignment="center"/>
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/gris"
+            android:text="Elige un nombre para tu lista"
+            android:layout_marginLeft="40dp"/>
+
+        <EditText
+            android:id="@+id/txtNombreLista"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:textColorHint="@color/gris"
+            android:hint="    Nombre de lista"
+            android:background="@drawable/customedittext"
+            android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+            />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/gris"
+            android:text="¿De qué será tu lista?"
+            android:layout_marginLeft="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <RadioGroup
+                android:id="@+id/RadioGroupTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:id="@+id/btn_pelicula"
+                    android:layout_width="50dp"
+                    android:layout_height="49dp"
+                    android:layout_marginRight="10dp"
+                    android:textAlignment="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/circulomoradorecurso"
+                    android:layout_marginLeft="90dp"
+                    android:layout_gravity="center"
+                    android:tag="Pelicula"
+                    android:drawableBottom="@drawable/categoriap"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:checked="false"/>
+
+                <RadioButton
+                    android:id="@+id/btn_libros"
+                    android:layout_width="50dp"
+                    android:layout_height="49dp"
+                    android:layout_marginRight="10dp"
+                    android:textAlignment="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/circulomoradorecurso"
+                    android:layout_gravity="center"
+                    android:drawableBottom="@drawable/categorialibros"
+                    android:textSize="20sp"
+                    android:tag="Libros"
+                    android:textStyle="bold"
+                    android:checked="false"/>
+
+                <RadioButton
+                    android:id="@+id/btn_videojuegos"
+                    android:layout_width="50dp"
+                    android:layout_height="49dp"
+                    android:layout_marginRight="10dp"
+                    android:textAlignment="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/circulomoradorecurso"
+                    android:layout_gravity="center"
+                    android:drawableBottom="@drawable/categoriavideojuego"
+                    android:textSize="20sp"
+                    android:tag="Videojuegos"
+                    android:textStyle="bold"
+                    android:checked="false"/>
+
+                <RadioButton
+                    android:id="@+id/btn_series"
+                    android:layout_width="50dp"
+                    android:layout_height="49dp"
+                    android:layout_marginRight="10dp"
+                    android:textAlignment="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/circulomoradorecurso"
+                    android:layout_gravity="center"
+                    android:drawableBottom="@drawable/categoriaseries"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:tag="Series"
+                    android:checked="false"/>
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/gris"
+            android:text="Elige una categoría"
+            android:layout_marginLeft="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <RadioGroup
+                android:id="@+id/RadioGroupCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:id="@+id/radioTerror"
+                    android:layout_width="90dp"
+                    android:layout_height="49dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/opcionesmenu"
+                    android:layout_marginLeft="50dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Terror"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <RadioButton
+                    android:id="@+id/radioRomance"
+                    android:layout_width="110dp"
+                    android:layout_height="49dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/opcionesmenurosa"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:text="Romance"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <RadioButton
+                    android:id="@+id/radioAccion"
+                    android:layout_width="90dp"
+                    android:layout_height="49dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/opcionesmenuamarillo"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Acción"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCrear"
+            android:layout_width="314dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="Crear"
+            android:textColorHint="@color/gris"
+            android:background="@drawable/opcionesmenurosa"
+            android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100" />
+
+        </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewMenuBusqueda"
+        android:name="mx.edu.plannert.menuInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        tools:layout="@layout/fragment_menu_inicio"/>
+
+</FrameLayout>

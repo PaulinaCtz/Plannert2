@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuPersonalNombre"
+    android:orientation="vertical"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+    <RadioGroup
+        android:id="@+id/radioGroupGenero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp">
+        <RadioButton
+            android:id="@+id/radioButtonFemenino"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:text="Femenino"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+        <RadioButton
+            android:id="@+id/radioButtonMasculino"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="Masculino"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radioButtonOtro"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:text="Otro"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/etOtroGenero"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/customedittext"/>
+        </LinearLayout>
+    </RadioGroup>
+    <Button
+        android:id="@+id/buttonCambiarGenero"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="Cambiar genero"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/custominicio"/>
+</LinearLayout>

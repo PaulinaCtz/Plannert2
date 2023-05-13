@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuPersonalNombre"
+    android:orientation="vertical"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:textColor="@color/white"
+        android:text=" Email actual"
+        android:textSize="18sp"/>
+    <EditText
+        android:id="@+id/etEmailActual"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/customedittext"
+        android:hint="  Email actual"
+        android:textColorHint="@color/gris"/>
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text=" Nuevo email"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+    <EditText
+        android:id="@+id/etNuevoEmail"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/customedittext"
+        android:hint="   Aquí va el nuevo email"
+        android:textColorHint="@color/gris"/>
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text=" Confirmar email"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+    <EditText
+        android:id="@+id/confirmarEmail"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/customedittext"
+        android:hint="   Aquí va el nuevo email"
+        android:textColorHint="@color/gris"/>
+    <Button
+        android:id="@+id/buttonCambiarEmail"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="Cambiar email"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/custominicio"/>
+
+</LinearLayout>

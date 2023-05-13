@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondomenu"
+    tools:context=".NecesitoAyuda"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/transparent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/intermedium"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:text="¿Qué es Plannert?" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="Plannert es una aplicación diseñada para \nayudarte a organizar tu lista de deseos
+        \npara series, películas, videojuegos, y \nlibros. La aplicación te permite crear una \nbucketlist o lista de tareas, donde
+        \npuedes agregar los títulos que te \ngustaría ver, leer o jugar en el futuro." />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/intermedium"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:text="Preguntas frecuentes. " />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="1. ¿Es Plannert gratuito? Sí, Plannert es \ncompletamente gratuito para
+        \ndescargar y usar. No hay cargos \nocultos ni suscripciones pagas." />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="2. ¿Puedo compartir mi lista de deseos \ncon otros usuarios? Sí, puedes
+        \ncompartir tu lista de deseos con \notros usuarios de Plannert si lo \ndeseas. La aplicación te permite
+        \ncompartir tu perfil y listas de deseos \ncon amigos y seguidores en las redes \nsociales. " />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/intermedium"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:text="Numero de asistencia." />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="+52 55 1234 5678"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/intermedium"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:text="Correo de asistencia." />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="@string/correo"/>
+
+</LinearLayout>

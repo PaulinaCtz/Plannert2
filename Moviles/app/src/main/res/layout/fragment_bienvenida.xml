@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+    tools:context=".Bienvenida">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:src="@drawable/icon"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="95dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:text="Bienvenido a Funplanner\n personaliza tu experiencia"
+        android:fontFamily="@font/intermedium"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:text="A continuación podrás \npersonalizar tu experiencia\n en plannert, completa el\n tutorial y comienza a\n planificar tus\n descubrimientos."
+        android:fontFamily="@font/intermedium"
+        android:layout_marginTop="70dp"
+        android:textSize="15sp"/>
+
+
+
+
+
+</LinearLayout>

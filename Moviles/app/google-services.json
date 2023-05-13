@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "776413250607",
+    "project_id": "plannert-ac404",
+    "storage_bucket": "plannert-ac404.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776413250607:android:b0840d3fbb9656ba5472da",
+        "android_client_info": {
+          "package_name": "mx.edu.plannert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776413250607-puelibqe0b64ujpaas7cuca823u6vcr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG5S5xty_hmomus2SlJ6LGQADRQ7CO25M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776413250607-puelibqe0b64ujpaas7cuca823u6vcr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

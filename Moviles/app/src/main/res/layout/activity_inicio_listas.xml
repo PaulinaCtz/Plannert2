@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/iniciosesion"
+    tools:context=".InicioListas">
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/icon"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/intermedium"/>
+    <ImageView
+        android:layout_width="230dp"
+        android:layout_height="130dp"
+        android:src="@drawable/fulanito16"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/intermedium"
+        android:textColor="@color/gris"
+        android:text="Nombre del usuario"/>
+
+
+    <Button
+        android:id="@+id/btnInicioLista"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:background="@drawable/custominicio"
+        android:hint="Crear mi primera lista"
+        android:textColorHint="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/masTardeInicioListas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Más tarde"
+        android:textAlignment="center"
+        android:textColor="@color/gris"
+        android:layout_marginTop="100dp"/>
+
+
+
+
+</LinearLayout>

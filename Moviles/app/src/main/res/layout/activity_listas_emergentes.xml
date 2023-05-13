@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/moradoOscuro"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".listasEmergentes">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:text="Guardar en"/>
+    <RadioGroup
+
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/radioButton1">
+
+        <RadioButton
+            android:id="@+id/botonLista1"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="Lista 1"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/formatocuadradomorado"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="10dp"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="Lista 2"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/formatocuadradomorado"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="10dp"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="Lista 3"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/formatocuadradomorado"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="10dp"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="Lista 4"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/formatocuadradomorado"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:layout_marginTop="10dp"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="Lista 5"
+            android:layout_marginHorizontal="3dp"
+            android:textAlignment="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/formatocuadradomorado"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+
+    </RadioGroup>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+<Button
+    android:layout_marginLeft="10dp"
+    android:layout_width="80dp"
+    android:textSize="9sp"
+    android:layout_height="40dp"
+    android:background="@drawable/formatocuadradomorado"
+    android:text="Guardar"/>
+
+        <Button
+            android:layout_marginLeft="10dp"
+            android:layout_width="85dp"
+            android:textSize="8sp"
+            android:layout_height="40dp"
+            android:background="@drawable/formatocuadradomorado"
+            android:text="Cancelar"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

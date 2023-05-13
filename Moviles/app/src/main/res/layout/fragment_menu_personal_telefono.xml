@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuPersonalNombre"
+    android:orientation="vertical"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:textColor="@color/white"
+        android:text=" Número actual"
+        android:textSize="18sp"/>
+    <EditText
+        android:id="@+id/etTelefonoActual"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:inputType="phone"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/customedittext"
+        android:hint="  6444444444"
+        android:textColorHint="@color/white"/>
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:text=" Nuevo número"
+        android:textSize="18sp"/>
+    <EditText
+        android:id="@+id/etTelefonoNuevo"
+        android:inputType="phone"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/customedittext"
+        android:hint="   644441141"
+        android:textColorHint="@color/white"/>
+    <Button
+        android:id="@+id/buttonModificarTelefono"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="Cambiar número de teléfono"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/custominicio"/>
+
+</LinearLayout>

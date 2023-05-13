@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/iniciosesion"
+    tools:context=".Registro">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/icon"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:text="Registro"
+        android:fontFamily="@font/intermedium"/>
+    <EditText
+        android:id="@+id/txt_email"
+        android:inputType="textEmailAddress"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:textColorHint="@color/gris"
+        android:hint="     Email"
+        android:background="@drawable/customedittext"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+    <EditText
+        android:id="@+id/txt_usuario"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:textColorHint="@color/gris"
+        android:hint="     Usuario"
+        android:background="@drawable/customedittext"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+    <EditText
+        android:id="@+id/txt_telefono"
+        android:inputType="phone"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:textColorHint="@color/gris"
+        android:hint="     Teléfono"
+        android:background="@drawable/customedittext"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+    <EditText
+        android:id="@+id/txt_contraseña"
+        android:inputType="textPassword"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:textColorHint="@color/gris"
+        android:hint="     Contraseña"
+        android:background="@drawable/customedittext"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+    <EditText
+        android:id="@+id/txt_confirmar"
+        android:inputType="textPassword"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:textColorHint="@color/gris"
+        android:hint="     Confirmar contraseña"
+        android:background="@drawable/customedittext"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center">
+        <EditText
+            android:id="@+id/txt_genero"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:layout_marginRight="10dp"
+            android:textColorHint="@color/gris"
+            android:hint="     Género"
+            android:background="@drawable/customedittext"
+            android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+            />
+        <EditText
+            android:id="@+id/txt_fecha"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:layout_marginLeft="5dp"
+            android:textColorHint="@color/gris"
+            android:hint="  dd/mm/aaaa"
+            android:background="@drawable/customedittext"
+            android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_guardar"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custominicio"
+        android:text="Registrar"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/intermedium"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:fontFamily="@font/intermedium"
+        android:textColor="@color/gris"
+        android:text="Registrar con google"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/intermedium"
+            android:textColor="@color/white"
+            android:text="¿Ya tienes cuenta?"/>
+        <TextView
+            android:id="@+id/tv_iniciaSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/intermedium"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:text="    Inicia Sesión"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/intermedium"
+        android:textColor="@color/gris"
+        android:text="Necesito ayuda"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/intermedium"
+        android:textColor="@color/gris"
+        android:text="No recuerdo usuario/contraseña"/>
+</LinearLayout>

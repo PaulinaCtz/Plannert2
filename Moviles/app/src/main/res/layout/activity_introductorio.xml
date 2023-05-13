@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/iniciosesion"
+    tools:context=".Introductorio">
+
+
+<TextView
+    android:id="@+id/textoOmitir"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Omitir"
+    android:textColor="@color/white"
+    android:layout_marginTop="25dp"
+    android:layout_marginLeft="25dp"
+    />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="mx.edu.plannert.Bienvenida"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp"
+
+        tools:layout="@layout/fragment_bienvenida" />
+
+    <LinearLayout
+        android:id="@+id/layoutI"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_siguientePaso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/intermedium"
+            android:text="Siguiente paso"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <RadioGroup
+            android:id="@+id/row1"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="45dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <RadioButton
+                android:id="@+id/Rbtn1"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/circulo"
+                android:button="@android:color/transparent"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/Rbtn2"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/circulo"
+                android:button="@android:color/transparent"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/Rbtn3"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/circulo"
+                android:button="@android:color/transparent"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/Rbtn4"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/circulo"
+                android:button="@android:color/transparent"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/Rbtn5"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/circulo"
+                android:button="@android:color/transparent"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+

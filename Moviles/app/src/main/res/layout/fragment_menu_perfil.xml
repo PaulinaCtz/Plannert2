@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+    tools:context=".MenuPerfil">
+
+
+    <ImageView
+        android:layout_width="230dp"
+        android:layout_height="130dp"
+        android:src="@drawable/fulanito16"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fulanito16"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:fontFamily="@font/intermedium"/>
+
+    <Button
+        android:id="@+id/perfilPersonal"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textColorHint="@color/white"
+        android:hint="Personal"
+        android:fontFamily="@font/intermedium"
+        android:textSize="17sp"
+        android:paddingTop="14dp"
+        android:paddingLeft="25dp"
+        android:gravity="left"
+        android:drawableRight="@drawable/flechacceso"
+        android:background="@drawable/customedittext"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+
+    <Button
+        android:id="@+id/perfilUsuario"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="9dp"
+        android:textColorHint="@color/white"
+        android:hint="Usuario"
+        android:fontFamily="@font/intermedium"
+        android:textSize="17sp"
+        android:paddingTop="14dp"
+        android:paddingLeft="25dp"
+        android:gravity="left"
+        android:background="@drawable/customedittext"
+        android:drawableRight="@drawable/flechacceso"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+
+    <Button
+        android:id="@+id/perfilCorreo"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="9dp"
+        android:textColorHint="@color/white"
+        android:hint="Correo electrónico"
+        android:fontFamily="@font/intermedium"
+        android:textSize="17sp"
+        android:paddingTop="14dp"
+        android:paddingLeft="25dp"
+        android:gravity="left"
+        android:background="@drawable/customedittext"
+        android:drawableRight="@drawable/flechacceso"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+
+    <Button
+        android:id="@+id/perfiContraseña"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="9dp"
+        android:textColorHint="@color/white"
+        android:hint="Contraseña"
+        android:fontFamily="@font/intermedium"
+        android:textSize="17sp"
+        android:paddingTop="14dp"
+        android:paddingLeft="25dp"
+        android:gravity="left"
+        android:background="@drawable/customedittext"
+        android:drawableRight="@drawable/flechacceso"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+
+    <Button
+        android:id="@+id/perfilEliminarCuenta"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="9dp"
+        android:textColorHint="@color/white"
+        android:hint="Eliminar cuenta"
+        android:fontFamily="@font/intermedium"
+        android:textSize="17sp"
+        android:paddingTop="14dp"
+        android:paddingLeft="25dp"
+        android:gravity="left"
+        android:background="@drawable/customedittext"
+        android:drawableRight="@drawable/flechacceso"
+        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
+        />
+
+
+
+
+
+</LinearLayout>

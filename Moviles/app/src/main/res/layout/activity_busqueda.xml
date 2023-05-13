@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondomenu"
+    tools:context=".busqueda">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerViewBusquedaTolbar"
+                android:name="mx.edu.plannert.toolBarBusqueda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                tools:layout="@layout/fragment_tool_bar_busqueda" />
+
+   </LinearLayout>
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewElementosBusqueda"
+        android:name="mx.edu.plannert.Interes"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+
+        tools:layout="@layout/fragment_interes"/>
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewMenuBusqueda"
+        android:name="mx.edu.plannert.menuInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        tools:layout="@layout/fragment_menu_inicio"/>
+
+
+</FrameLayout>

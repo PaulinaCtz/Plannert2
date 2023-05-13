@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondomenu"
+    tools:context=".Ayuda">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/transparent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="1. ¿Qué es &quot;plannert&quot;? &quot;Plannert&quot; es una
+        \naplicación de bucketlist que te \npermite hacer una lista de cosas que
+        \ndeseas hacer en tu vida y planificar \ncómo alcanzar esas metas. Puedes
+        \nhacer una lista de lugares que quieres \nvisitar, cosas que quieres aprender,
+        \nactividades que quieres probar y \ncualquier otro objetivo que quieras \nalcanzar."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="2. ¿Cómo creo una lista de bucketlist en \n&quot;plannert&quot;? Para crear una lista de
+        \nbucketList en &quot;plannert&quot;, sigue estos \npasos:"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="45dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="• Descarga e instala la aplicación en tu \ndispositivo."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="45dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="• Crea una cuenta o inicia sesión en tu \ncuenta existente."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="45dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="• Haz click en el botón &quot;Agregar lista&quot;\npara crear una nueva lista de \nbucketlist."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="45dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="• Asigna un nombre a la lista y añade \nuna descripción breve."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="45dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="• Añade los elementos de la lista \nhaciendo clic en el botón &quot;Agregar \nelemento&quot;"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="45dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="• Escribe el nombre del elemento y \nañade una descripción breve si lo \ndeseas."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/interregular"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="45dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="• Guarda el elemento haciendo clic en \nel botón &quot;Guardar&quot;"/>
+
+
+</LinearLayout>
