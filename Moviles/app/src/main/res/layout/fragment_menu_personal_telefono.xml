@@ -14,16 +14,18 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="70dp"
         android:textColor="@color/white"
+
         android:text=" Número actual"
         android:textSize="18sp"/>
     <EditText
         android:id="@+id/etTelefonoActual"
         android:layout_width="350dp"
         android:layout_height="65dp"
-        android:inputType="phone"
+        android:inputType="none"
+        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="  6444444444"
+        android:hint=""
         android:textColorHint="@color/white"/>
     <TextView
         android:layout_width="350dp"
@@ -40,7 +42,7 @@
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="   644441141"
+        android:hint="Ingrese nuevo numero"
         android:textColorHint="@color/white"/>
     <Button
         android:id="@+id/buttonModificarTelefono"
@@ -48,6 +50,7 @@
         android:layout_height="65dp"
         android:layout_gravity="center"
         android:textColor="@color/white"
+        android:inputType="phone"
         android:text="Cambiar número de teléfono"
         android:layout_marginTop="50dp"
         android:background="@drawable/custominicio"/>

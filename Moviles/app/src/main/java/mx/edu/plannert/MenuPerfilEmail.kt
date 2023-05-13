@@ -43,19 +43,47 @@ class MenuPerfilEmail : Fragment() {
         val txtNuevoEmail = view.findViewById<EditText>(R.id.etNuevoEmail)
         val txtConfirmarEmail = view.findViewById<EditText>(R.id.confirmarEmail)
         val btnModificarEmail = view.findViewById<Button>(R.id.buttonCambiarEmail)
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+
+        txtEmailActual.isEnabled=false
+        txtEmailActual.isFocusable=false
+
+        val usuariosRef: DatabaseReference = database.getReference("usuarios")
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val email = currentUser.email
+            txtEmailActual.setText(email)
+        }
+
 
         btnModificarEmail.setOnClickListener {
             val emailActual = txtEmailActual.text.toString()
             val nuevoEmail = txtNuevoEmail.text.toString()
             val confirmarEmail = txtConfirmarEmail.text.toString()
 
-            modificarEmail(emailActual, nuevoEmail, confirmarEmail)
+
+            modificarEmail(emailActual, nuevoEmail, confirmarEmail,
+                onSuccess = { nuevoEmail ->
+                   txtEmailActual.setText(nuevoEmail)
+                    txtNuevoEmail.setText("")
+                    txtConfirmarEmail.setText("")
+                }
+            )
+
+
         }
 
         return view
     }
 
-    private fun modificarEmail(emailActual: String, nuevoEmail: String, confirmarEmail: String) {
+    private fun modificarEmail(
+        emailActual: String,
+        nuevoEmail: String,
+        confirmarEmail: String,
+        onSuccess: (String) -> Unit
+    ) {
         if (emailActual.isEmpty() || nuevoEmail.isEmpty()) {
             Toast.makeText(requireContext(), "¡Debes llenar todos los campos!", Toast.LENGTH_SHORT)
                 .show()
@@ -92,17 +120,21 @@ class MenuPerfilEmail : Fragment() {
                                                 .setValue(nuevoEmail)
                                                 .addOnCompleteListener { emailTask ->
                                                     if (emailTask.isSuccessful) {
+
                                                         // El correo electrónico se actualizó correctamente en la base de datos
                                                         Toast.makeText(
                                                             requireContext(),
                                                             "¡Correo electrónico modificado!",
                                                             Toast.LENGTH_SHORT
                                                         ).show()
+
+                                                        // Llamar a la función de retorno pasando el nuevo correo electrónico
+                                                        onSuccess(nuevoEmail)
                                                     } else {
                                                         // Manejar el caso de error al actualizar el correo electrónico en la base de datos
                                                         Toast.makeText(
                                                             requireContext(),
-                                                            "¡Ha ocurrido un error!",
+                                                            "¡Ha ocurrido un error !",
                                                             Toast.LENGTH_SHORT
                                                         ).show()
                                                     }
@@ -115,7 +147,7 @@ class MenuPerfilEmail : Fragment() {
                                         // Manejar el caso de error en la consulta de la base de datos
                                         Toast.makeText(
                                             requireContext(),
-                                            "¡Ha ocurrido un error!",
+                                            "¡Ha ocurrido un error cancelled!",
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     }
@@ -124,7 +156,7 @@ class MenuPerfilEmail : Fragment() {
                             // Manejar el caso de error al actualizar el correo electrónico en la autenticación
                             Toast.makeText(
                                 requireContext(),
-                                "¡Ha ocurrido un error!",
+                                "¡Ha ocurrido un error otro!",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -139,9 +171,12 @@ class MenuPerfilEmail : Fragment() {
             }
         } else {
             // Manejar el caso de usuario no autenticado
-            Toast.makeText(requireContext(), "¡Ha ocurrido un error!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "¡Ha ocurrido un error !", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
 
     companion object {
         private const val ARG_PARAM1 = "param1"

@@ -44,8 +44,15 @@ class menuInicio : Fragment() {
         val botonBuscar = view.findViewById<ImageView>(R.id.iconoBuscar)
         val botonListas = view.findViewById<ImageView>(R.id.iconoListas)
         val botonNueva = view.findViewById<Button>(R.id.nuevaLista)
+        val botonInicio = view.findViewById<ImageView>(R.id.iconoInicio)
         botonBuscar.setOnClickListener{
             val intent = Intent(activity, busqueda::class.java)
+
+            startActivity(intent)
+        }
+
+        botonInicio.setOnClickListener{
+            val intent = Intent(activity, Inicio::class.java)
 
             startActivity(intent)
         }

@@ -22,7 +22,8 @@
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="  Email actual"
+        android:hint=""
+        android:textColor="@color/white"
         android:textColorHint="@color/gris"/>
     <TextView
         android:layout_width="350dp"

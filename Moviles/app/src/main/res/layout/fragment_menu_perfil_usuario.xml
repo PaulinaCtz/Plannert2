@@ -22,7 +22,8 @@
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="  Usuario actual"
+        android:hint=""
+        android:editable="false"
         android:textColorHint="@color/gris"/>
     <TextView
         android:layout_width="350dp"
