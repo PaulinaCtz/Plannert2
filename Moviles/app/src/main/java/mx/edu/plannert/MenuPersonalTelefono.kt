@@ -3,6 +3,7 @@ package mx.edu.plannert
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.InputFilter
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,6 +47,9 @@ class MenuPersonalTelefono : Fragment() {
         val txtTelefonoNuevo = view.findViewById<EditText>(R.id.etTelefonoNuevo)
         val btnModificarTelefono = view.findViewById<Button>(R.id.buttonModificarTelefono)
        txtTelefonoActual.isEnabled=false
+
+        limitEditTextLength(txtTelefonoNuevo, 10)
+
         obtenerUsuarioActual { usuario ->
             if (usuario != null) {
                 usuarioActual = usuario
@@ -173,6 +177,12 @@ class MenuPersonalTelefono : Fragment() {
             // Manejar el caso de usuario no autenticado
             Toast.makeText(requireContext(), "¡Ha ocurrido un error!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun limitEditTextLength(editText: EditText, maxLength: Int) {
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = InputFilter.LengthFilter(maxLength)
+        editText.filters = filterArray
     }
 
     companion object {

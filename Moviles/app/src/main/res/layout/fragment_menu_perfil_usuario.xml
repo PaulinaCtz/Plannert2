@@ -24,7 +24,8 @@
         android:background="@drawable/customedittext"
         android:hint=""
         android:editable="false"
-        android:textColorHint="@color/gris"/>
+        android:textColorHint="@color/gris"
+        android:textColor="@color/white"/>
     <TextView
         android:layout_width="350dp"
         android:layout_height="30dp"
@@ -40,7 +41,8 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
         android:hint="   Aquí va el nuevo usuario"
-        android:textColorHint="@color/gris"/>
+        android:textColorHint="@color/gris"
+        android:textColor="@color/white"/>
     <TextView
         android:layout_width="350dp"
         android:layout_height="30dp"
@@ -56,7 +58,8 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
         android:hint="   Aquí va el nuevo usuario"
-        android:textColorHint="@color/gris"/>
+        android:textColorHint="@color/gris"
+        android:textColor="@color/white"/>
     <Button
         android:id="@+id/buttonCambiarUsuario"
         android:layout_width="350dp"

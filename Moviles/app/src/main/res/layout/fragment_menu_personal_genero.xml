@@ -45,6 +45,7 @@
                 android:id="@+id/etOtroGenero"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
+                android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:background="@drawable/customedittext"/>
         </LinearLayout>

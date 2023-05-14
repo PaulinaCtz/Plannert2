@@ -1,6 +1,7 @@
 package mx.edu.plannert
 
 import android.os.Bundle
+import android.text.InputFilter
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,10 @@ class MenuPerfilPassword : Fragment() {
         val txtConfirmarContraseña = view.findViewById<EditText>(R.id.etConfirmarContraseña)
         val btnModificarContraseña = view.findViewById<Button>(R.id.buttonCambiarContraseña)
 
+        limitEditTextLength(txtContraseñaActual, 25)
+        limitEditTextLength(txtContraseñaNueva, 25)
+        limitEditTextLength(txtConfirmarContraseña, 25)
+
         btnModificarContraseña.setOnClickListener {
             val contraseñaActual = txtContraseñaActual.text.toString()
             val contraseñaNueva = txtContraseñaNueva.text.toString()
@@ -69,6 +74,12 @@ class MenuPerfilPassword : Fragment() {
 
         if (contraseñaNueva != confirmarContraseña) {
             Toast.makeText(requireContext(), "¡Las contraseñas no coinciden!", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        if (!isValidPassword(contraseñaNueva) || !isValidPassword(confirmarContraseña)){
+            Toast.makeText(requireContext(), "¡Ingresa una contraseña válida!", Toast.LENGTH_SHORT)
                 .show()
             return
         }
@@ -170,6 +181,17 @@ class MenuPerfilPassword : Fragment() {
             Toast.makeText(requireContext(), "¡No se ha iniciado sesión!", Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    fun isValidPassword(password: String): Boolean {
+        val passwordPattern = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$")
+        return passwordPattern.matches(password)
+    }
+
+    private fun limitEditTextLength(editText: EditText, maxLength: Int) {
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = InputFilter.LengthFilter(maxLength)
+        editText.filters = filterArray
     }
 
     companion object {

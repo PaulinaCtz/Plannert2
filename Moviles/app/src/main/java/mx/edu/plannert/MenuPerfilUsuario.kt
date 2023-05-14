@@ -1,6 +1,7 @@
 package mx.edu.plannert
 
 import android.os.Bundle
+import android.text.InputFilter
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,9 @@ class MenuPerfilUsuario : Fragment() {
         val txtNombreNuevo = view.findViewById<EditText>(R.id.etNombreNuevo)
         val txtConfirmarNombre = view.findViewById<EditText>(R.id.etConfirmarNombre)
         val btnModificarNombre = view.findViewById<Button>(R.id.buttonCambiarUsuario)
+
+        limitEditTextLength(txtNombreNuevo, 30)
+        limitEditTextLength(txtConfirmarNombre, 30)
 
         obtenerUsuarioActual { usuario ->
             if (usuario != null) {
@@ -203,5 +207,11 @@ class MenuPerfilUsuario : Fragment() {
             Toast.makeText(requireContext(), "¡Ha ocurrido un error!", Toast.LENGTH_SHORT).show()
 
         }
+    }
+
+    private fun limitEditTextLength(editText: EditText, maxLength: Int) {
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = InputFilter.LengthFilter(maxLength)
+        editText.filters = filterArray
     }
 }

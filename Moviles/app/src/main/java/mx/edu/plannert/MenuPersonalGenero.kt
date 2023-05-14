@@ -1,6 +1,10 @@
 package mx.edu.plannert
 
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputType
+import android.text.method.DigitsKeyListener
+import android.text.method.NumberKeyListener
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +47,9 @@ class MenuPersonalGenero : Fragment() {
         val radioButtonMasculino = view.findViewById<RadioButton>(R.id.radioButtonMasculino)
         val radioButtonOtro = view.findViewById<RadioButton>(R.id.radioButtonOtro)
         val etOtroGenero = view.findViewById<EditText>(R.id.etOtroGenero)
+
+        limitEditTextLength(etOtroGenero, 20)
+        disableNumericInput(etOtroGenero)
 
         radioGroupGenero.check(radioButtonOtro.id)
 
@@ -127,6 +134,25 @@ class MenuPersonalGenero : Fragment() {
 
         return view
     }
+
+    private fun limitEditTextLength(editText: EditText, maxLength: Int) {
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = InputFilter.LengthFilter(maxLength)
+        editText.filters = filterArray
+    }
+
+    private fun disableNumericInput(editText: EditText) {
+        editText.keyListener = object : NumberKeyListener() {
+            override fun getInputType(): Int {
+                return InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+            }
+
+            override fun getAcceptedChars(): CharArray {
+                return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
+            }
+        }
+    }
+
 
     companion object {
         /**

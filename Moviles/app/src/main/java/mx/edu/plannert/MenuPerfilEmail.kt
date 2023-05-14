@@ -1,6 +1,7 @@
 package mx.edu.plannert
 
 import android.os.Bundle
+import android.text.InputFilter
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +49,10 @@ class MenuPerfilEmail : Fragment() {
         txtEmailActual.isEnabled=false
         txtEmailActual.isFocusable=false
 
+        // Limitar la longitud máxima del campo de texto a 60 caracteres
+        limitEditTextLength(txtNuevoEmail, 40)
+        limitEditTextLength(txtConfirmarEmail, 40)
+
         val usuariosRef: DatabaseReference = database.getReference("usuarios")
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -63,17 +68,23 @@ class MenuPerfilEmail : Fragment() {
             val nuevoEmail = txtNuevoEmail.text.toString()
             val confirmarEmail = txtConfirmarEmail.text.toString()
 
-
-            modificarEmail(emailActual, nuevoEmail, confirmarEmail,
-                onSuccess = { nuevoEmail ->
-                   txtEmailActual.setText(nuevoEmail)
-                    txtNuevoEmail.setText("")
-                    txtConfirmarEmail.setText("")
+            if (isValidEmail(emailActual) && isValidEmail(nuevoEmail) && isValidEmail(confirmarEmail)) {
+                if (nuevoEmail != confirmarEmail) {
+                    Toast.makeText(requireContext(), "¡Los correos no coinciden!", Toast.LENGTH_SHORT).show()
+                } else {
+                    modificarEmail(emailActual, nuevoEmail, confirmarEmail,
+                        onSuccess = { nuevoEmail ->
+                            txtEmailActual.setText(nuevoEmail)
+                            txtNuevoEmail.setText("")
+                            txtConfirmarEmail.setText("")
+                        }
+                    )
                 }
-            )
-
-
+            } else {
+                Toast.makeText(requireContext(), "¡Ingresa un correo electrónico válido!", Toast.LENGTH_SHORT).show()
+            }
         }
+
 
         return view
     }
@@ -175,7 +186,16 @@ class MenuPerfilEmail : Fragment() {
         }
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        val pattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+".toRegex()
+        return email.matches(pattern) && email.length <= 40
+    }
 
+    private fun limitEditTextLength(editText: EditText, maxLength: Int) {
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = InputFilter.LengthFilter(maxLength)
+        editText.filters = filterArray
+    }
 
 
     companion object {

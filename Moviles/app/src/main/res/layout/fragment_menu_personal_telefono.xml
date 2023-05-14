@@ -38,6 +38,7 @@
     <EditText
         android:id="@+id/etTelefonoNuevo"
         android:inputType="phone"
+        android:textColor="@color/white"
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"

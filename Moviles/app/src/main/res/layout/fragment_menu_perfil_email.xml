@@ -23,6 +23,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
         android:hint=""
+        android:editable="false"
         android:textColor="@color/white"
         android:textColorHint="@color/gris"/>
     <TextView
@@ -35,11 +36,13 @@
         android:textSize="18sp"/>
     <EditText
         android:id="@+id/etNuevoEmail"
+        android:inputType="textEmailAddress"
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
         android:hint="   Aquí va el nuevo email"
+        android:textColor="@color/white"
         android:textColorHint="@color/gris"/>
     <TextView
         android:layout_width="350dp"
@@ -53,7 +56,9 @@
         android:id="@+id/confirmarEmail"
         android:layout_width="350dp"
         android:layout_height="65dp"
+        android:inputType="textEmailAddress"
         android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
         android:background="@drawable/customedittext"
         android:hint="   Aquí va el nuevo email"
         android:textColorHint="@color/gris"/>
