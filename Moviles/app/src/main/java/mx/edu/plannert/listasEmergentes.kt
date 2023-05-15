@@ -56,6 +56,7 @@ class listasEmergentes : AppCompatActivity() {
 
 
 
+
                 val adapter = BotonesAdapter(this, listasDeUsuario as ArrayList<Lista>,detallesPeliculas)
                 gridView.adapter = adapter
 
@@ -154,6 +155,7 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
         val button = Button(context)
         button.text = botones[position].nombre
         button.layoutParams = ViewGroup.LayoutParams(
@@ -269,7 +271,7 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
                                     ).show()
                                 }
                         } else {
-                            Toast.makeText(context, "El contenido ya está en la lista", Toast.LENGTH_SHORT).show()
+                          //  Toast.makeText(context, "El contenido ya está en la lista", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(context, "No se encontraron contenidos en la lista", Toast.LENGTH_SHORT).show()

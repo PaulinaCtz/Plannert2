@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 
 class DetalleContenidoDetalle : AppCompatActivity() {
@@ -54,11 +57,85 @@ class DetalleContenidoDetalle : AppCompatActivity() {
             intent2.putExtra("nombreImagen", nombreImagen)
             intent2.putExtra("tipo", tipo)
 
-            startActivity(intent2)
+            obtenerListasDeUsuario { listasDeUsuario ->
+
+                if (listasDeUsuario?.size?:0> 0) {
+
+
+                    startActivity(intent2)
+
+                }else{
+                    Toast.makeText(
+                        this,
+                        "No hay listas ",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
+
         }
 
 
     }
 
+    fun obtenerListasDeUsuario( callback: (listas: List<Lista>?) -> Unit) {
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val listasRef: DatabaseReference = database.getReference("listas")
+        val usuariosRef: DatabaseReference = database.getReference("usuarios")
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
+
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val email = currentUser.email
+
+
+
+            usuariosRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (usuarioSnapshot in dataSnapshot.children) {
+                        val usuarioKey = usuarioSnapshot.key
+
+
+                        listasRef.orderByChild("idUsuario").equalTo(usuarioKey)
+                            .addListenerForSingleValueEvent(object :
+                                ValueEventListener {
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    val listas = mutableListOf<Lista>()
+
+                                    for (listaSnapshot in dataSnapshot.children) {
+                                        val lista = listaSnapshot.getValue(Lista::class.java)
+                                        lista?.let {
+                                            listas.add(it)
+                                        }
+                                    }
+
+                                    callback(listas)
+                                }
+
+                                override fun onCancelled(databaseError: DatabaseError) {
+                                    callback(null)
+                                }
+                            })
+
+
+
+
+
+
+                    }
+
+
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+
+                }
+            })
+
+        }
+    }
 }
