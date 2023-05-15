@@ -10,6 +10,7 @@ import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +44,7 @@ class detalleContenido : Fragment() {
         val view = inflater.inflate(R.layout.fragment_detalle_contenido, container, false)
 
 
-        val contenido= arguments?.getParcelable<Contenidos>("contenido")
+        val contenido= arguments?.getParcelable<DetallesPeliculas>("contenido")
 
 
 
@@ -56,7 +57,8 @@ class detalleContenido : Fragment() {
 
         if (contenido != null) {
             titulo.setText(contenido.titulo)
-            imagen.setImageResource(contenido.imagen)
+            Picasso.get().load(contenido.urlImagen).into(imagen)
+            //imagen.setImageResource(contenido.imagen)
             descripcion.setText(contenido.descripcion)
         }
 
@@ -89,7 +91,20 @@ class detalleContenido : Fragment() {
                 }
             }
 
+        /*
         fun newInstance(contenido: Contenidos): detalleContenido {
+            val fragment = detalleContenido()
+            val args = Bundle()
+
+            args.putParcelable("contenido",contenido)
+
+            fragment.arguments = args
+            return fragment
+        }
+
+         */
+
+        fun newInstance(contenido: DetallesPeliculas): detalleContenido {
             val fragment = detalleContenido()
             val args = Bundle()
 

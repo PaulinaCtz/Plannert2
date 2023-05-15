@@ -7,6 +7,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 class CrearLista : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,26 +45,35 @@ class CrearLista : AppCompatActivity() {
 
             }else if(fragment is Categorias) {
                 val imagenes = arrayListOf(
-                    Contenidos(R.drawable.pluto,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.netflix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.primevideo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.cuevana,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hbo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.diney,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.star,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.tubi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.vix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.appletv,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.paramount,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hulu,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.pluto,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.netflix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.primevideo,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.cuevana,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hbo,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.diney,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.star,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.tubi,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.vix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.appletv,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.paramount,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hulu,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
 
                     )
-               val titlesd = Interes.newInstance(imagenes,"Romance",true)
-                titulo.setText("Escoge los titulos de tu interés ")
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerViewCuerpo,titlesd )
-                    .commit()
+
+                obtenerDetalleContenido { listaDetallePeliculas ->
+                    // Hacer lo que necesites con la lista de objetos DetallesPeliculas
+                    titulo.setText("Escoge los titulos de tu interés ")
+                    val titlesd = Interes.newInstance(listaDetallePeliculas,"",true)
+
+                   // ESTE ABRE EL QUE TIENE LAS CATEGORIAS
+                  //  val titlesd = Interes.newInstance(listaDetallePeliculas,"",true)
+
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerViewCuerpo,titlesd )
+                        .commit()
+                }
 
                 btn1.setBackgroundResource(R.drawable.circulo)
                 btn2.setBackgroundResource(R.drawable.circulo)
@@ -129,27 +144,33 @@ class CrearLista : AppCompatActivity() {
 
             btn3.setOnClickListener{
                 val imagenes = arrayListOf(
-                    Contenidos(R.drawable.pluto,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.netflix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.primevideo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.cuevana,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hbo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.diney,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.star,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.tubi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.vix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.appletv,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.paramount,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hulu,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.pluto,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.netflix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.primevideo,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.cuevana,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hbo,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.diney,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.star,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.tubi,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.vix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.appletv,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.paramount,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hulu,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
 
                     )
-                val titlesd = Interes.newInstance(imagenes,"Romance",true)
-                titulo.setText("Escoge los titulos de tu interés ")
-                siguiente.setText("Siguiente")
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerViewCuerpo,titlesd )
-                    .commit()
+
+                obtenerDetalleContenido { listaDetallePeliculas ->
+                    // Hacer lo que necesites con la lista de objetos DetallesPeliculas
+                    titulo.setText("Escoge los titulos de tu interés ")
+                    val titlesd = Interes.newInstance(listaDetallePeliculas,true)
+
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerViewCuerpo,titlesd )
+                        .commit()
+                }
+
 
                 btn1.setBackgroundResource(R.drawable.circulo)
                 btn2.setBackgroundResource(R.drawable.circulo)
@@ -173,6 +194,54 @@ class CrearLista : AppCompatActivity() {
 
 
 
+        }
+    }
+
+    fun obtenerDetalleContenido(callback: (ArrayList<DetallesPeliculas>) -> Unit) {
+
+        val database = Firebase.database
+        val detalleContenidoRef = database.reference.child("detalleContenido")
+        val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+        detalleContenidoRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                listaDetalleContenido.clear()
+                for (registroSnapshot in dataSnapshot.children) {
+                    var registro = registroSnapshot.getValue(DetallesPeliculas::class.java)
+                    listaDetalleContenido.add(registro!!)
+                }
+                // Llamar al callback con la lista actualizada
+                callback(listaDetalleContenido)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Manejar errores
+            }
+        })
+    }
+    fun obtenerPlataformas(callback: (ArrayList<DetallesPeliculas>) -> Unit) {
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference.child("plataformas/")
+        val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+        storageRef.listAll().addOnSuccessListener { result ->
+            result.items.forEach { item ->
+                item.downloadUrl.addOnSuccessListener { uri ->
+                    val registro = DetallesPeliculas(
+                        urlImagen = uri.toString(),
+                        categoria = "",
+                        descripcion = "",
+                        fecha = "",
+                        nombreImagen = "",
+                        tipo = "",
+                        titulo = ""
+                    )
+                    listaDetalleContenido.add(registro)
+                    callback(listaDetalleContenido)
+                }
+            }
+        }.addOnFailureListener {
+            // Manejar errores
         }
     }
 }

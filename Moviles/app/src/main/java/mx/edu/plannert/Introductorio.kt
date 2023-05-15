@@ -9,7 +9,14 @@ import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.storage.FirebaseStorage
 
 class Introductorio : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
@@ -35,31 +42,54 @@ class Introductorio : AppCompatActivity() {
 
         siguiente.setOnClickListener {
             fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+
+
+
+
+            obtenerDetalleContenido { listaDetalleContenido ->
+                print(listaDetalleContenido)
+            }
+
+
             if(fragment is Bienvenida) {
                 actual="peliculas"
 
+
+                /*
                 val imagenes = arrayListOf(
-                    Contenidos(R.drawable.prodigy,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.alien,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.elvis,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.fightclub,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.tres,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.prodigy,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.alien,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.ironman,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.shanchi,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.quantumania,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.lightyear,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.shrek,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.elvis,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.fightclub,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.tres,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.blackswan,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hollywood,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
 
-                    )
-               val interes=Interes.newInstance(imagenes,"Peliculas")
+                    )*/
 
 
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, interes)
-                    .commit()
+
+
+                //  ESTO ES LO NUEVO!!!!
+                print("llego aqui")
+               // print(listaDetalleContenido.get(3))
+                obtenerDetalleContenido { listaDetalleContenido ->
+                    // Utilizar la lista actualizada
+                    val interes=Interes.newInstance(listaDetalleContenido,"Peliculas")
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, interes)
+                        .commit()
+                }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
                 Rbtn2.setBackgroundResource(R.drawable.circuloseleccionado)
                 Rbtn3.setBackgroundResource(R.drawable.circulo)
@@ -69,29 +99,36 @@ class Introductorio : AppCompatActivity() {
             }else if(fragment is Interes&& actual=="peliculas"){
 
                     actual = "plataformas"
+                /*
                 val imagenesP = arrayListOf(
-                    Contenidos(R.drawable.pluto,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.netflix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.primevideo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.cuevana,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hbo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.diney,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.star,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.tubi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.vix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.appletv,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.paramount,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hulu,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.pluto,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.netflix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.primevideo,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.cuevana,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hbo,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.diney,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.star,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.tubi,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.vix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.appletv,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.paramount,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hulu,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
 
                     )
-                    val interes2 = Interes.newInstance(imagenesP, "Plataformas")
+                    */
+
+                obtenerPlataformas { listaDetalleContenido ->
+                    // Hacer lo que necesites con la lista de objetos DetallesPeliculas
+                    val interes2 = Interes.newInstance(listaDetalleContenido, "Plataformas")
 
 
 
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, interes2)
                         .commit()
+                }
+
                     Rbtn1.setBackgroundResource(R.drawable.circulo)
                     Rbtn2.setBackgroundResource(R.drawable.circulo)
                 Rbtn5.setBackgroundResource(R.drawable.circulo)
@@ -148,26 +185,14 @@ class Introductorio : AppCompatActivity() {
 
         Rbtn2.setOnClickListener{
 
-            val imagenes = arrayListOf(
-                Contenidos(R.drawable.prodigy,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.alien,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.elvis,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.fightclub,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.tres,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+            obtenerDetalleContenido { listaDetalleContenido ->
+                // Utilizar la lista actualizada
+                val interes=Interes.newInstance(listaDetalleContenido,"Peliculas")
 
-
-                )
-                val interes=Interes.newInstance(imagenes,"Peliculas")
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, interes)
                     .commit()
+            }
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circulo)
             Rbtn5.setBackgroundResource(R.drawable.circulo)
@@ -184,27 +209,17 @@ class Introductorio : AppCompatActivity() {
         Rbtn3.setOnClickListener{
 
 
-
-            val imagenesPlataformas = arrayListOf(
-                Contenidos(R.drawable.pluto,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.netflix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.primevideo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.cuevana,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.hbo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.diney,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.star,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.tubi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.vix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.appletv,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.paramount,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.hulu,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+            obtenerPlataformas { listaDetalleContenido ->
+                // Hacer lo que necesites con la lista de objetos DetallesPeliculas
+                val interes2 = Interes.newInstance(listaDetalleContenido, "Plataformas")
 
 
-                )
-                val interes2=Interes.newInstance(imagenesPlataformas,"Plataformas")
+
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, interes2)
                     .commit()
+            }
+
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
             Rbtn2.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circulo)
@@ -252,6 +267,57 @@ class Introductorio : AppCompatActivity() {
 
 
 }
+
+fun obtenerDetalleContenido(callback: (ArrayList<DetallesPeliculas>) -> Unit) {
+
+    val database = Firebase.database
+    val detalleContenidoRef = database.reference.child("detalleContenido")
+    val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+    detalleContenidoRef.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            listaDetalleContenido.clear()
+            for (registroSnapshot in dataSnapshot.children) {
+                var registro = registroSnapshot.getValue(DetallesPeliculas::class.java)
+                listaDetalleContenido.add(registro!!)
+            }
+            // Llamar al callback con la lista actualizada
+            callback(listaDetalleContenido)
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            // Manejar errores
+        }
+    })
+}
+fun obtenerPlataformas(callback: (ArrayList<DetallesPeliculas>) -> Unit) {
+    val storage = FirebaseStorage.getInstance()
+    val storageRef = storage.reference.child("plataformas/")
+    val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+    storageRef.listAll().addOnSuccessListener { result ->
+        result.items.forEach { item ->
+            item.downloadUrl.addOnSuccessListener { uri ->
+                val registro = DetallesPeliculas(
+                    urlImagen = uri.toString(),
+                    categoria = "",
+                    descripcion = "",
+                    fecha = "",
+                    nombreImagen = "",
+                    tipo = "",
+                    titulo = ""
+                )
+                listaDetalleContenido.add(registro)
+                callback(listaDetalleContenido)
+            }
+        }
+    }.addOnFailureListener {
+        // Manejar errores
+    }
+}
+
+
+
 
 private fun FragmentTransaction.replace(fragmentContainerView: Int, elegirAvatar: elegirAvatar.Companion) {
 
