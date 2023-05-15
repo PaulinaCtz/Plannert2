@@ -30,21 +30,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
-<Button
-    android:id="@+id/btnAgregarContenidoLista"
-    android:layout_marginLeft="30dp"
-    android:layout_width="95dp"
-    android:textSize="12sp"
-    android:layout_marginBottom="20dp"
-    android:layout_height="40dp"
-    android:textStyle="bold"
-    android:background="@drawable/formatocuadradomorado"
-    android:text="Guardar"/>
+
+
 
         <Button
             android:id="@+id/btnCancelarEmergentes"
-            android:layout_marginLeft="30dp"
-            android:layout_width="95dp"
+            android:layout_marginLeft="60dp"
+            android:layout_width="165dp"
             android:textSize="12sp"
             android:layout_height="40dp"
             android:textStyle="bold"

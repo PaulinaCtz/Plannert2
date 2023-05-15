@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class listasEmergentes : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +35,7 @@ class listasEmergentes : AppCompatActivity() {
         val categoria = intent.getStringExtra("categoria")
         val tipo = intent.getStringExtra("tipo")
         val fecha = intent.getStringExtra("fecha")
-     //  val botones = arrayOf("Botón 1", "Botón 2", "Botón 3", "Botón 4", "Botón 5")
-       // val adapter = BotonesAdapter(this, botones)
+
         val detallesPeliculas: DetallesPeliculas = DetallesPeliculas()
         detallesPeliculas.urlImagen= urlImagen.toString()
         detallesPeliculas.categoria=categoria.toString()
@@ -47,21 +48,18 @@ class listasEmergentes : AppCompatActivity() {
 
       //  gridView.adapter = adapter
 
-/*
-            val intent = Intent(this, busqueda::class.java)
-            intent.putExtra("fragmento", "FragmentoLista")
-            startActivity(intent)*/
-        val listas = ArrayList<String>()
 
-        obtenerListasDeUsuario { listasUsuario ->
-            // Utilizar la lista actualizada
-            if (listasUsuario != null) {
-                for (lista in listasUsuario) {
-                    listas.add(lista.nombre)
-                }
 
-                val adapter = BotonesAdapter(this, listasUsuario as ArrayList<Lista>,detallesPeliculas)
+        obtenerListasDeUsuario { listasDeUsuario ->
+
+            if (listasDeUsuario != null) {
+
+
+
+                val adapter = BotonesAdapter(this, listasDeUsuario as ArrayList<Lista>,detallesPeliculas)
                 gridView.adapter = adapter
+
+
             }
 
         }
@@ -142,7 +140,7 @@ class listasEmergentes : AppCompatActivity() {
 
 
 class BotonesAdapter(private val context: Context, private val botones: ArrayList<Lista>,private val contenido:DetallesPeliculas) : BaseAdapter() {
-
+    var isUpdating = false
     override fun getCount(): Int {
         return botones.size
     }
@@ -162,50 +160,122 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
+
         button.setOnClickListener {
-
-
-            val listaSeleccionada = botones[position]
-            //Toast.makeText(context, "Botón seleccionado: $listaSeleccionada", Toast.LENGTH_SHORT).show()
-
-            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val listasRef: DatabaseReference = database.getReference("listas")
+        button.isEnabled=false
 
 
 
-          //  val listaReferencia = listasRef.child("listas").child(listaSeleccionada.nombre)
-            val listaReferencia = listasRef.orderByChild("nombre")
-                .equalTo(listaSeleccionada.nombre)
+                val listaSeleccionada = botones[position]
 
-            val nuevoContenido = HashMap<String, Any>()
-            nuevoContenido["contenidos"] = listOf(contenido)
+                obtenerLista(listaSeleccionada) { listaDetalleContenido ->
+                    if (!isUpdating) {
+                        isUpdating = true
+                    val contenidos: ArrayList<DetallesPeliculas> =
+                        ArrayList(listaDetalleContenido.get(0).contenidos)
 
-            listaReferencia.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // Obtener la referencia al registro de la lista a actualizar
-                    val registro = dataSnapshot.children.first()
 
-                    // Actualizar el campo "contenidos" del registro con el nuevo valor
-                    registro.ref.updateChildren(nuevoContenido).addOnCompleteListener {
-                        Toast.makeText(context, "Contenido agregado a la lista", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener {
-                        Toast.makeText(context, "Error al agregar contenido a la lista", Toast.LENGTH_SHORT).show()
-                    }
+
+                    contenidos.add(contenido)
+                    actualizarLista(contenidos, listaSeleccionada, context,contenido)
+
+
                 }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(context, "Error al obtener la lista de la base de datos", Toast.LENGTH_SHORT).show()
-                }
-            })
-
-
+            }
 
 
         }
-        return button
+            return button
+
     }
 
     //AQUI TERMINA
+    fun obtenerLista(contenido: Lista, callback: (ArrayList<Lista>) -> Unit) {
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val listasRef: DatabaseReference = database.getReference("listas")
+        val listaDetalleContenido = ArrayList<Lista>()
+
+        val query = listasRef.orderByChild("nombre").equalTo(contenido.nombre)
+
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                listaDetalleContenido.clear()
+                for (registroSnapshot in dataSnapshot.children) {
+                    val registro = registroSnapshot.getValue(Lista::class.java)
+                    registro?.let { listaDetalleContenido.add(it) }
+                }
+                // Llamar al callback con la lista actualizada
+                callback(listaDetalleContenido)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Manejar errores
+            }
+        })
+    }
+
+
+    fun actualizarLista(contenidos: List<DetallesPeliculas>, listaSeleccionada: Lista, context: Context, contenido: DetallesPeliculas) {
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val listasRef: DatabaseReference = database.getReference("listas")
+
+        val listaReferencia = listasRef.orderByChild("nombre")
+            .equalTo(listaSeleccionada.nombre)
+
+        listaReferencia.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val registro = dataSnapshot.children.firstOrNull()
+
+                if (registro != null) {
+                    val lista = registro.getValue(Lista::class.java)
+                    val listaContenidos = lista?.contenidos
+
+                    if (listaContenidos != null) {
+
+                        val contenidoExistente = listaContenidos.find { it.titulo == contenido.titulo }
+
+                        if (contenidoExistente == null) {
+
+                            listaContenidos.add(contenido)
+
+
+                            registro.ref.child("contenidos").setValue(listaContenidos)
+                                .addOnCompleteListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Contenido agregado a la lista",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Error al agregar contenido a la lista",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        } else {
+                            Toast.makeText(context, "El contenido ya está en la lista", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(context, "No se encontraron contenidos en la lista", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(context, "No se encontró la lista en la base de datos", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(context, "Error al obtener la lista de la base de datos", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+
+
+
 
 
 }

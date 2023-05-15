@@ -7,7 +7,8 @@ data class Lista(
     val idUsuario: String,
     val nombre: String,
     val tipo: String,
-    val usuario: String
+    val usuario: String,
+    val contenidos:ArrayList<DetallesPeliculas>
 ) {
-    constructor() : this("", false, "", "", "", "", "")
+    constructor() : this("", false, "", "", "", "", "", ArrayList())
 }
