@@ -194,6 +194,8 @@ class MisListas : AppCompatActivity() {
 
     }
 
+
+
     class PortadaAdapter(private val listas: List<Portada>) :
         RecyclerView.Adapter<PortadaAdapter.PortadaViewHolder>() {
 
@@ -241,10 +243,7 @@ class MisListas : AppCompatActivity() {
                     alertDialogBuilder.setPositiveButton("Aceptar") { dialog, _ ->
                         val nuevoNombre = inputEditText.text.toString()
 
-                        // Aquí realizas la lógica para actualizar el nombre de la lista
-                        // usando el nuevoNombre obtenido
 
-                        // Obtener la posición del elemento en el RecyclerView
                         val position = adapterPosition
 
                         // Obtener el nombre de la lista que se va a cambiar
@@ -323,6 +322,65 @@ class MisListas : AppCompatActivity() {
 
                     true
                 }
+
+                menu?.findItem(R.id.opcion_mostrarContenido)?.setOnMenuItemClickListener {
+                    // Lógica para la opción "Eliminar"
+
+
+                        // Obtener la posición del elemento en el RecyclerView
+                        val position = adapterPosition
+
+                        // Obtener el nombre de la lista que se va a eliminar
+                        val nombreLista = listas[position].nombre
+
+                        // Eliminar el registro de la base de datos
+                        val database = FirebaseDatabase.getInstance()
+                        val databaseReference = database.getReference("listas")
+
+                    databaseReference.orderByChild("nombre").equalTo(nombreLista).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            for (registroSnapshot in dataSnapshot.children) {
+                                // Obtener los datos de la lista que coincida con el nombre
+                                val lista: Lista? = registroSnapshot.getValue(Lista::class.java)
+
+
+                                if (lista != null) {
+
+                                    val nombre = lista.nombre
+                                    val categoria= lista.categoria
+                                    val contenidos = lista.contenidos
+                                    val favorita =lista.favorita
+                                    val icono =lista.icono
+                                    val usuario=lista.usuario
+                                    val idUsuario=lista.idUsuario
+                                     val tipo= lista.tipo
+
+
+                                    val intent = Intent(context, ListasFav2Activity::class.java)
+                                    intent.putExtra("nombre", nombre)
+                                    intent.putExtra("categoria", categoria)
+                                    intent.putParcelableArrayListExtra("contenidos", contenidos)
+                                    intent.putExtra("favorita", favorita)
+                                    intent.putExtra("icono", icono)
+                                    intent.putExtra("usuario", usuario)
+                                    intent.putExtra("idUsuario", idUsuario)
+                                    intent.putExtra("tipo", tipo)
+                                    context.startActivity(intent)
+
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            // Manejar el error si lo hay
+                        }
+                    })
+
+
+                    true
+                }
+
+
             }
 
             private fun setMenuBackground() {
