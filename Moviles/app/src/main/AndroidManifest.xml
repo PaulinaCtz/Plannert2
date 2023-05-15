@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Plannert"
         tools:targetApi="31">
         <activity
+            android:name=".MostrarContenidoLista"
+            android:exported="false" />
+        <activity
             android:name=".DetalleContenidoDetalle"
             android:exported="false" />
         <activity

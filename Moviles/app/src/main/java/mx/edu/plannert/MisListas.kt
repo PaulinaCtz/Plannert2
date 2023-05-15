@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -89,56 +90,108 @@ class MisListas : AppCompatActivity() {
 
     fun obtenerListaPortadas(callback: ObtenerListaPortadasCallback) {
         val database = FirebaseDatabase.getInstance()
-        val databaseReference = database.getReference("listas")
+        val databaseReferenceListas = database.getReference("listas")
 
         val portadas = ArrayList<Portada>()
 
-        databaseReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
 
-                //Limpiar
+        if (currentUser != null) {
+            val userEmail = currentUser.email
 
-                portadas.clear()
+            val database = FirebaseDatabase.getInstance()
+            val databaseReference = database.getReference("usuarios")
 
-                // Manejar los datos obtenidos de los registros
-                for (registroSnapshot in dataSnapshot.children) {
-                    // Obtener los datos del registro
-                    val categoria = registroSnapshot.child("icono").getValue(String::class.java)
-                    //    val contenidos = registroSnapshot.child("contenidos").getValue(String::class.java)
-                    val favorita = registroSnapshot.child("favorita").getValue(Boolean::class.java)
-                    val icono = registroSnapshot.child("icono").getValue(String::class.java)
-                    val nombre = registroSnapshot.child("nombre").getValue(String::class.java)
-                    val tipo = registroSnapshot.child("tipo").getValue(String::class.java)
-                    val usuario = registroSnapshot.child("usuario").getValue(String::class.java)
+            databaseReference.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (usuarioSnapshot in dataSnapshot.children) {
+                        val usuarioKey = usuarioSnapshot.key
+                     // Aqui ya que obtengo el usuario tome el key para comparar con el de la sesion y mostrar solo las listas de el
 
-                    if (icono == "icono1") {
-                        val nombreLista = nombre ?: ""
-                        portadas.add(Portada(R.drawable.portadalistados, nombreLista))
+                        databaseReferenceListas.addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                                //Limpiar
+
+                                portadas.clear()
+
+                                // Manejar los datos obtenidos de los registros
+                                for (registroSnapshot in dataSnapshot.children) {
+                                    // Obtener los datos del registro
+                                    val categoria = registroSnapshot.child("icono").getValue(String::class.java)
+                                    //    val contenidos = registroSnapshot.child("contenidos").getValue(String::class.java)
+                                    val favorita = registroSnapshot.child("favorita").getValue(Boolean::class.java)
+                                    val icono = registroSnapshot.child("icono").getValue(String::class.java)
+                                    val nombre = registroSnapshot.child("nombre").getValue(String::class.java)
+                                    val tipo = registroSnapshot.child("tipo").getValue(String::class.java)
+                                    val usuario = registroSnapshot.child("idUsuario").getValue(String::class.java)
+
+
+
+
+                                    if(usuarioKey==usuario) {
+                                        if (icono == "icono1") {
+                                            val nombreLista = nombre ?: ""
+                                            portadas.add(
+                                                Portada(
+                                                    R.drawable.portadalistados,
+                                                    nombreLista
+                                                )
+                                            )
+                                        }
+                                        if (icono == "icono2") {
+                                            val nombreLista = nombre ?: ""
+                                            portadas.add(
+                                                Portada(
+                                                    R.drawable.portadalistatres,
+                                                    nombreLista
+                                                )
+                                            )
+                                        }
+                                        if (icono == "icono3") {
+                                            val nombreLista = nombre ?: ""
+                                            portadas.add(
+                                                Portada(
+                                                    R.drawable.portadalistauno,
+                                                    nombreLista
+                                                )
+                                            )
+                                        }
+                                        if (icono == "icono4") {
+                                            val nombreLista = nombre ?: ""
+                                            portadas.add(
+                                                Portada(
+                                                    R.drawable.portadalistacuatro,
+                                                    nombreLista
+                                                )
+                                            )
+                                        }
+                                    }
+
+
+                                    // Manejar los datos obtenidos del registro
+                                }
+
+                                callback.onListaPortadasObtenida(portadas)
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                // Manejar el error si lo hay
+                            }
+                        })
                     }
-                    if (icono == "icono2") {
-                        val nombreLista = nombre ?: ""
-                        portadas.add(Portada(R.drawable.portadalistatres, nombreLista))
-                    }
-                    if (icono == "icono3") {
-                        val nombreLista = nombre ?: ""
-                        portadas.add(Portada(R.drawable.portadalistauno, nombreLista))
-                    }
-                    if (icono == "icono4") {
-                        val nombreLista = nombre ?: ""
-                        portadas.add(Portada(R.drawable.portadalistacuatro, nombreLista))
-                    }
-
-
-                    // Manejar los datos obtenidos del registro
                 }
 
-                callback.onListaPortadasObtenida(portadas)
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    // Manejar el error si lo hay
+                }
+            })
+        } else {
+            // El usuario actual no está autenticado
+            Toast.makeText(this, "El usuario actual no está autenticado.", Toast.LENGTH_SHORT).show()
+        }
 
-            override fun onCancelled(error: DatabaseError) {
-                // Manejar el error si lo hay
-            }
-        })
     }
 
     class PortadaAdapter(private val listas: List<Portada>) :

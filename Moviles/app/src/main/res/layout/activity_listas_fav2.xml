@@ -43,6 +43,7 @@
 
 
         <TextView
+            android:id="@+id/tv_tituloLista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mi lista favorita #1"
