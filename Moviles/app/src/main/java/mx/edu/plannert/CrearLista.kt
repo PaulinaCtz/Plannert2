@@ -143,22 +143,7 @@ class CrearLista : AppCompatActivity() {
             }
 
             btn3.setOnClickListener{
-                val imagenes = arrayListOf(
-                    Contenidos(R.drawable.pluto,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.netflix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.primevideo,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.cuevana,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hbo,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.diney,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.star,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.tubi,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.vix,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.appletv,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.paramount,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                    Contenidos(R.drawable.hulu,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
-
-                    )
 
                 obtenerDetalleContenido { listaDetallePeliculas ->
                     // Hacer lo que necesites con la lista de objetos DetallesPeliculas

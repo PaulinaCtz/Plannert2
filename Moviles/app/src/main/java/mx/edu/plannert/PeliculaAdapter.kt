@@ -36,7 +36,12 @@ class PeliculaAdapter(private val context: Context, private val contenidos: Arra
                 val intent = Intent(context, DetalleContenidoDetalle::class.java)
                 intent.putExtra("titulo", contenidos[position].titulo)
                 intent.putExtra("descripcion", contenidos[position].descripcion)
-                intent.putExtra("imagen", contenidos[position].urlImagen)
+                intent.putExtra("urlImagen", contenidos[position].urlImagen)
+                intent.putExtra("categoria", contenidos[position].categoria)
+                intent.putExtra("fecha", contenidos[position].fecha)
+                intent.putExtra("nombreImagen", contenidos[position].nombreImagen)
+                intent.putExtra("tipo", contenidos[position].tipo)
+
                 context.startActivity(intent)
 
 

@@ -18,18 +18,43 @@ class DetalleContenidoDetalle : AppCompatActivity() {
         val tituloview = findViewById<TextView>(R.id.tituloContenido)
         val agregar=findViewById<ImageView>(R.id.agregarContenido)
 
-        val intent = intent
+        var intent = intent
         val titulo = intent.getStringExtra("titulo")
         val descripcion = intent.getStringExtra("descripcion")
-        val imagen = intent.getStringExtra("imagen")
+        val urlImagen = intent.getStringExtra("urlImagen")
+        val nombreImagen = intent.getStringExtra("nombreImagen")
+        val categoria = intent.getStringExtra("categoria")
+        val tipo = intent.getStringExtra("tipo")
+        val fecha = intent.getStringExtra("fecha")
 
-        Picasso.get().load(imagen).into(imagenView)
+        val intent2 = Intent(this, listasEmergentes::class.java)
+        intent2.putExtra("titulo", titulo)
+        intent2.putExtra("descripcion", descripcion)
+        intent2.putExtra("urlImagen", urlImagen)
+        intent2.putExtra("categoria", categoria)
+        intent2.putExtra("fecha", fecha)
+        intent2.putExtra("nombreImagen", nombreImagen)
+        intent2.putExtra("tipo", tipo)
+
+//DE AQUI MANDAMOS GUARDAR
+
+
+        Picasso.get().load(urlImagen).into(imagenView)
         descripcionview.setText(descripcion)
         tituloview.setText(titulo)
 
         agregar.setOnClickListener {
-            val intent = Intent(this, listasEmergentes::class.java)
-            startActivity(intent)
+
+            val intent2 = Intent(this, listasEmergentes::class.java)
+            intent2.putExtra("titulo", titulo)
+            intent2.putExtra("descripcion", descripcion)
+            intent2.putExtra("urlImagen", urlImagen)
+            intent2.putExtra("categoria", categoria)
+            intent2.putExtra("fecha", fecha)
+            intent2.putExtra("nombreImagen", nombreImagen)
+            intent2.putExtra("tipo", tipo)
+
+            startActivity(intent2)
         }
 
 

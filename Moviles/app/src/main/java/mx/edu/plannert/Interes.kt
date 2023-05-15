@@ -151,8 +151,7 @@ class Interes : Fragment() {
 
         if(imagenes!=null ) {
 
-            //Se fija si la instancia de intere creada  tiene el paramero true de tipo busqeueda para mandar el true como parametro en el image adapter para que permite el click
-            //On listener de los elementos del gridview
+
             if(busqueda==true) {
 
                 //val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, true)
@@ -160,7 +159,7 @@ class Interes : Fragment() {
                 gridView.adapter = adapter
             }else{
 
-                print("ENTRO AL QUE SE SUPONE QUE ES")
+
 
                 val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, false)
                 gridView.adapter = adapter

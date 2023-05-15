@@ -4,12 +4,12 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class DetallesPeliculas(
-    val categoria: String,
-    val descripcion: String,
-    val fecha: String,
-    val nombreImagen: String,
-    val tipo: String,
-    val titulo: String,
+    var categoria: String,
+    var descripcion: String,
+    var fecha: String,
+    var nombreImagen: String,
+    var tipo: String,
+    var titulo: String,
     var urlImagen: String
 ) : Parcelable {
 
