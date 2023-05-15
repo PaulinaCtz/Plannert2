@@ -9,6 +9,11 @@ import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.RadioButton
 import android.widget.TextView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -63,7 +68,7 @@ class Interes : Fragment() {
         val view = inflater.inflate(R.layout.fragment_interes, container, false)
 
 
-        val imagenes = arguments?.getParcelableArrayList<Contenidos>("imagenes")
+        val imagenes = arguments?.getParcelableArrayList<DetallesPeliculas>("imagenes")
         val sub = arguments?.getString("subtitulo")
         val ocultar= arguments?.getBoolean("ocultar")
         val busqueda= arguments?.getBoolean("busqueda")
@@ -150,36 +155,63 @@ class Interes : Fragment() {
             //On listener de los elementos del gridview
             if(busqueda==true) {
 
-                val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, true)
+                //val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, true)
+                val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, true)
                 gridView.adapter = adapter
             }else{
 
-                val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, false)
+                print("ENTRO AL QUE SE SUPONE QUE ES")
+
+                val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, false)
                 gridView.adapter = adapter
             }
 
         }else{
+            /*
             val imagenes2 = arrayListOf(
-                Contenidos(R.drawable.prodigy,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.alien,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.elvis,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.fightclub,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.tres,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.prodigy,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.alien,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.ironman,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shanchi,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.quantumania,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.lightyear,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shrek,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.elvis,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.fightclub,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.tres,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.blackswan,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.hollywood,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
-            )
+            )*/
+
+            val database = Firebase.database
+            val detalleContenidoRef = database.reference.child("detalleContenido")
+
+            val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+            detalleContenidoRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // Obtener los datos de los registros en detalleContenido
+                    listaDetalleContenido.clear()
+                    for (registroSnapshot in dataSnapshot.children) {
+                        var registro = registroSnapshot.getValue(DetallesPeliculas::class.java)
+                        println(registro)
+                        listaDetalleContenido.add(registro!!)
+                        println("")
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Manejar errores
+                }
+            })
+
 
             if(busqueda==true){
-                val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>,true)
+                val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,true)
                 gridView.adapter = adapter
             }else{
-            val adapter = ImageAdapter(requireContext(), imagenes2,false)
+            val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,false)
             gridView.adapter = adapter}
         }
 
@@ -261,7 +293,7 @@ class Interes : Fragment() {
 
 
 
-        fun newInstance(imagenes: ArrayList<Contenidos>,subtitulo:String,ocultar: Boolean): Interes {
+        fun newInstance(imagenes: ArrayList<DetallesPeliculas>,subtitulo:String,ocultar: Boolean): Interes {
             val fragment = Interes()
             val args = Bundle()
             args.putParcelableArrayList("imagenes",imagenes)
@@ -271,7 +303,17 @@ class Interes : Fragment() {
             return fragment
         }
 
+        /*
         fun newInstance(images: ArrayList<Contenidos>,subtitulo:String): Interes {
+            val fragment = Interes()
+            val args = Bundle()
+            args.putParcelableArrayList("imagenes",images)
+            args.putString("subtitulo",subtitulo)
+            fragment.arguments = args
+            return fragment
+        }*/
+
+        fun newInstance(images: ArrayList<DetallesPeliculas>,subtitulo:String): Interes {
             val fragment = Interes()
             val args = Bundle()
             args.putParcelableArrayList("imagenes",images)
@@ -282,7 +324,7 @@ class Interes : Fragment() {
 
 
 
-        fun newInstance(imagenes: ArrayList<Contenidos>): Interes {
+        fun newInstance(imagenes: ArrayList<DetallesPeliculas>): Interes {
             val fragment = Interes()
             val args = Bundle()
             args.putParcelableArrayList("imagenes",imagenes)
@@ -290,7 +332,7 @@ class Interes : Fragment() {
             return fragment
         }
 
-        fun newInstance(imagenes: ArrayList<Contenidos>,busqueda: Boolean): Interes {
+        fun newInstance(imagenes: ArrayList<DetallesPeliculas>,busqueda: Boolean): Interes {
             val fragment = Interes()
             val args = Bundle()
 
@@ -300,7 +342,7 @@ class Interes : Fragment() {
             return fragment
         }
 
-        fun newInstance(imagenes: ArrayList<Contenidos>,ocultarBotones: Boolean,descripcion:String,titulo:String): Interes {
+        fun newInstance(imagenes: ArrayList<DetallesPeliculas>,ocultarBotones: Boolean,descripcion:String,titulo:String): Interes {
             val fragment = Interes()
             val args = Bundle()
 
@@ -312,7 +354,7 @@ class Interes : Fragment() {
             return fragment
         }
 
-        fun newInstance(imagenes: ArrayList<Contenidos>,ocultarBotones: Boolean,descripcion:String,titulo:String,busqueda:Boolean): Interes {
+        fun newInstance(imagenes: ArrayList<DetallesPeliculas>,ocultarBotones: Boolean,descripcion:String,titulo:String,busqueda:Boolean): Interes {
             val fragment = Interes()
             val args = Bundle()
 

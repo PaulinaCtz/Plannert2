@@ -1,5 +1,6 @@
 package mx.edu.plannert
 
+
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
@@ -9,35 +10,46 @@ import android.widget.AbsListView
 import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.ImageView
+import com.squareup.picasso.Picasso
 
-class ImageAdapter(private val context: Context, private val contenidos: ArrayList<Contenidos>,private val busqueda:Boolean) : BaseAdapter() {
+class PeliculaAdapter(private val context: Context, private val contenidos: ArrayList<DetallesPeliculas>,private val busqueda:Boolean) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val imageView = ImageView(context)
-        imageView.setImageResource(contenidos[position].imagen)
+       // imageView.setImageResource(contenidos[position].imagen)
+        Picasso.get().load(contenidos[position].urlImagen).into(imageView)
+
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         imageView.layoutParams = AbsListView.LayoutParams(365, 490)
 
 
-            // para mostrar el detalle :)
-            imageView.setOnClickListener {
-                // verificica si se esta usando en busqueda para ver si se activa la funcionalidad del clickOnListener de los elementos del gridview
-                if(busqueda==true) {
+        // para mostrar el detalle :)
+        imageView.setOnClickListener {
+            // verificica si se esta usando en busqueda para ver si se activa la funcionalidad del clickOnListener de los elementos del gridview
+            if(busqueda==true) {
                 val activity = context as busqueda
 
 
-               /* val detalleFragment = detalleContenido.newInstance(contenidos[position])
+                val detalleFragment = detalleContenido.newInstance(contenidos[position])
 
 
+                val intent = Intent(context, DetalleContenidoDetalle::class.java)
+                intent.putExtra("titulo", contenidos[position].titulo)
+                intent.putExtra("descripcion", contenidos[position].descripcion)
+                intent.putExtra("imagen", contenidos[position].urlImagen)
+                context.startActivity(intent)
 
+
+                /*
                 activity.supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerViewBusquedaTolbar, toolBarIcono())
                     .commit()
 
                 activity.supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerViewElementosBusqueda, detalleFragment)
-                    .commit()
-*/
+                    .commit()*/
+
+
 
             }
         }

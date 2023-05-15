@@ -16,18 +16,18 @@ class listasEmergentes : AppCompatActivity() {
 
             //Se supone que estas son las de la lista 1 ya despues se obtienen de BD
             val imagenes = arrayListOf(
-                Contenidos(R.drawable.prodigy,"Prodigy", "Autor 1", "Descripción 1 shhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhbb  sggdgsgsgagag dhgcgshksskmvkfsdajnvhsfbadncz", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.alien,"Título de prueba largo hhhh lbg", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.elvis,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.fightclub,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.tres,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-                Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.prodigy,"Prodigy", "Descripción 1 shhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhbb  sggdgsgsgagag dhgcgshksskmvkfsdajnvhsfbadncz", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.alien,"Título de prueba largo hhhh lbg", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.ironman,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shanchi,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.quantumania,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.lightyear,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shrek,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.elvis,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.fightclub,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.tres,"Título 1","Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.blackswan,"Título 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.hollywood,"Título 1",  "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
 
                 )

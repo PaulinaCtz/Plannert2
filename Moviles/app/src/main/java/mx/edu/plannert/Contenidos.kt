@@ -5,7 +5,6 @@ import android.os.Parcelable
 
 data class Contenidos( val imagen: Int,
                        val titulo: String,
-                       val autor: String,
                        val descripcion: String,
                        val fecha: String,
                        val tipo: String,
@@ -17,14 +16,12 @@ data class Contenidos( val imagen: Int,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!,
         parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(imagen)
         parcel.writeString(titulo)
-        parcel.writeString(autor)
         parcel.writeString(descripcion)
         parcel.writeString(fecha)
         parcel.writeString(tipo)
