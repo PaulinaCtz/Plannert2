@@ -160,6 +160,20 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
+        val contenidos = botones[position].contenidos
+        var encontrado = false
+
+        for (item in contenidos) {
+            if (item.titulo == contenido.titulo) {
+                encontrado = true
+                break
+            }
+        }
+
+        if (encontrado) {
+            button.isEnabled = false
+        }
+
 
         button.setOnClickListener {
         button.isEnabled=false
@@ -169,8 +183,7 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
                 val listaSeleccionada = botones[position]
 
                 obtenerLista(listaSeleccionada) { listaDetalleContenido ->
-                    if (!isUpdating) {
-                        isUpdating = true
+
                     val contenidos: ArrayList<DetallesPeliculas> =
                         ArrayList(listaDetalleContenido.get(0).contenidos)
 
@@ -180,7 +193,7 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
                     actualizarLista(contenidos, listaSeleccionada, context,contenido)
 
 
-                }
+
             }
 
 
