@@ -70,15 +70,6 @@
         android:textColor="@color/white"
         android:fontFamily="@font/intermedium"
         />
-    <TextView
-        android:id="@+id/inicioGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:fontFamily="@font/intermedium"
-        android:textColor="@color/gris"
-        android:text="Inicia sesión con Google"/>
 
     <LinearLayout
         android:orientation="horizontal"

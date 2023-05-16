@@ -134,14 +134,6 @@
         android:textColor="@color/white"
         android:fontFamily="@font/intermedium"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:fontFamily="@font/intermedium"
-        android:textColor="@color/gris"
-        android:text="Registrar con google"/>
 
     <LinearLayout
         android:orientation="horizontal"

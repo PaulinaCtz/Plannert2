@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         val recuerda: TextView = findViewById(R.id.recuerdaContraseña)
         val botonIS: Button = findViewById(R.id.btnIniciarSesion)
         val necesitoAyuda: TextView = findViewById(R.id.necesitoAyuda)
-        val inicioGoogle: TextView = findViewById(R.id.inicioGoogle)
 
         val emailET: EditText = findViewById(R.id.txt_emailInicio)
         val pswET: EditText = findViewById(R.id.txt_contraseñaInicio)
@@ -74,10 +73,6 @@ class MainActivity : AppCompatActivity() {
         try {
             val options = GoogleSignInOptions.Builder().requestEmail().build()
             client = GoogleSignIn.getClient(this, options)
-            inicioGoogle.setOnClickListener {
-                val intent = client.signInIntent
-                startActivityForResult(intent, 100)
-            }
         } catch (e: ApiException) {
             // Manejar la excepción
         }
