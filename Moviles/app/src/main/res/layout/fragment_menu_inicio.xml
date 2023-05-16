@@ -64,6 +64,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="3dp"
             android:drawableLeft="@drawable/mas"
+
             android:drawablePadding="8dp"
             android:paddingLeft="27dp"
             android:paddingRight="75dp"
