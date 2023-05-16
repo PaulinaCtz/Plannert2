@@ -3,20 +3,21 @@ package mx.edu.plannert
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Contenidos( val imagen: Int,
-                       val titulo: String,
-                       val descripcion: String,
-                       val fecha: String,
-                       val tipo: String,
-                       val categoria: String): Parcelable {
-
+data class Contenidos(
+    val imagen: Int = 0,
+    val titulo: String? = null,
+    val descripcion: String? = null,
+    val fecha: String? = null,
+    val tipo: String? = null,
+    val categoria: String? = null
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -42,3 +43,4 @@ data class Contenidos( val imagen: Int,
         }
     }
 }
+
