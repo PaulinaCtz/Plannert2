@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         val registro: TextView = findViewById(R.id.tv_registrate)
+        val recuerda: TextView = findViewById(R.id.recuerdaContraseña)
         val botonIS: Button = findViewById(R.id.btnIniciarSesion)
         val necesitoAyuda: TextView = findViewById(R.id.necesitoAyuda)
         val inicioGoogle: TextView = findViewById(R.id.inicioGoogle)
@@ -47,6 +48,28 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
+
+        recuerda.setOnClickListener {
+
+            val email = emailET.text.toString().trim() // Obtén el correo electrónico del usuario desde un EditText o cualquier otro componente de entrada
+
+            if (email.isNotEmpty()) {
+                val auth = FirebaseAuth.getInstance()
+                auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Se ha enviado un correo electrónico para restablecer la contraseña", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // Ocurrió un error al enviar el correo electrónico
+                            val errorMessage = task.exception?.message
+                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            } else {
+                Toast.makeText(this, "Ingrese su correo electrónico", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         try {
             val options = GoogleSignInOptions.Builder().requestEmail().build()
