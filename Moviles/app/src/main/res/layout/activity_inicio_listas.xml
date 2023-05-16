@@ -24,14 +24,15 @@
         android:textAlignment="center"
         android:fontFamily="@font/intermedium"/>
     <ImageView
+        android:id="@+id/avatarImagen"
         android:layout_width="230dp"
         android:layout_height="130dp"
-        android:src="@drawable/fulanito16"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         />
 
     <TextView
+        android:id="@+id/nombreUsuariotxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

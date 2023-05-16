@@ -88,19 +88,6 @@ class MenuPersonal : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
-        val boton5 = view.findViewById<Button>(R.id.personalPlataformas)
-        //   val etiquetaTolbar=view.findViewById<TextView>(R.id.etiquetaNavegacion)
-        boton5.setOnClickListener {
-            // Reemplaza el fragmento actual por el nuevo fragmento
-            val nuevoFragmento = MenuPersonalPlataformas()
-            tolbar.actualizarTexto("Menu / Personal / Plataformas")
-
-            val transaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.fragmentContainerViewCuerpo, nuevoFragmento)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
-
         return view
     }
 

@@ -78,24 +78,6 @@
         android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
         />
 
-    <Button
-        android:id="@+id/personalPlataformas"
-        android:layout_width="350dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="9dp"
-        android:textColorHint="@color/white"
-        android:hint="Plataformas"
-        android:fontFamily="@font/intermedium"
-        android:textSize="17sp"
-        android:paddingTop="14dp"
-        android:paddingLeft="25dp"
-        android:gravity="left"
-        android:background="@drawable/customedittext"
-        android:drawableRight="@drawable/flechacceso"
-        android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
-        />
-
 
 
 
