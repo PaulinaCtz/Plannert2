@@ -62,14 +62,6 @@ class Inicio : AppCompatActivity() {
                 tvname.text = "Error al obtener el nombre de usuario"
             }
         })
-
-        val cerrar: TextView = findViewById(R.id.cerrar)
-        cerrar.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            client.signOut()
-            val i: Intent = Intent(this, MainActivity::class.java)
-            startActivity(i)
-        }
     }
 
     override fun onResume() {

@@ -11,6 +11,10 @@ import android.content.Intent
 
 import android.widget.Button
 import android.widget.ImageView
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +30,8 @@ class menuInicio : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var client: GoogleSignInClient
+    val options = GoogleSignInOptions.Builder().requestEmail().build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +51,16 @@ class menuInicio : Fragment() {
         val botonListas = view.findViewById<ImageView>(R.id.iconoListas)
         val botonNueva = view.findViewById<Button>(R.id.nuevaLista)
         val botonInicio = view.findViewById<ImageView>(R.id.iconoInicio)
+        val botonCerrar = view.findViewById<ImageView>(R.id.cerrar)
+        val options = GoogleSignInOptions.Builder().requestEmail().build()
+        client = GoogleSignIn.getClient(this.requireActivity(),options)
+
+        botonCerrar.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            client.signOut()
+            val i: Intent = Intent(activity, MainActivity::class.java)
+            startActivity(i)
+        }
         botonBuscar.setOnClickListener{
             val intent = Intent(activity, busqueda::class.java)
 
