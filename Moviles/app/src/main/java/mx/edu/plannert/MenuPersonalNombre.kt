@@ -56,6 +56,12 @@ class MenuPersonalNombre : Fragment() {
         limitEditTextLength(etApodo, 20)
         disableNumericInput(etApodo)
 
+        obtenerUsuarioActual { usuario ->
+            if(usuario!=null) {
+                etNombre.setText(usuario?.nombre)
+                etApodo.setText(usuario?.apodo)
+            }
+        }
         btnCambiarNombre.setOnClickListener {
             nombre = etNombre.text.toString().trim()
             apellido = etApellido.text.toString().trim()
@@ -114,6 +120,32 @@ class MenuPersonalNombre : Fragment() {
                     Toast.makeText(requireContext(), "¡Ha ocurrido un error en la consulta de la base de datos!", Toast.LENGTH_SHORT).show()
                 }
             })
+        }
+    }
+
+    fun obtenerUsuarioActual(callback: (Usuarios?) -> Unit) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val usuariosRef: DatabaseReference= database.getReference("usuarios")
+
+            val usuarioReferencia = usuariosRef.orderByChild("email").equalTo(currentUser.email)
+
+            usuarioReferencia.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val usuarioSnapshot = dataSnapshot.children.firstOrNull()
+
+                    val usuario = usuarioSnapshot?.getValue(Usuarios::class.java)
+                    callback(usuario)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    callback(null)
+                }
+            })
+        } else {
+            callback(null)
         }
     }
 

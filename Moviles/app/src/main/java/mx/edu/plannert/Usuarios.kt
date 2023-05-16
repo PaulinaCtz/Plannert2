@@ -5,9 +5,11 @@ data class Usuarios(
     val fechaNacimiento: String = "",
     val genero: String = "",
     val telefono: String = "",
+    val Avatar: String = "",
+    val apodo:String="",
     val usuario: String = "",
     val nombre : String
 ) {
     // Constructor sin argumentos
-    constructor() : this("", "", "", "", "", "", "")
+    constructor() : this("", "", "", "","", "","", "", "")
 }

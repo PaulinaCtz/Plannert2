@@ -22,7 +22,7 @@
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="   Fulanito fulanito"
+        android:hint="Nombre"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
         android:inputType="textPersonName"/>
