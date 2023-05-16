@@ -135,6 +135,8 @@ class Registro : AppCompatActivity() {
 
                                     // Aquí puedes realizar alguna acción adicional después de crear el usuario
                                     Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                                    val intent = Intent(this, MainActivity::class.java)
+                                    startActivity(intent)
                                 } else {
                                     // Si ocurre un error al crear el usuario, muestra un mensaje de error
                                     Toast.makeText(this, "Error al crear el usuario", Toast.LENGTH_SHORT).show()

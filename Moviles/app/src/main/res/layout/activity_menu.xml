@@ -56,7 +56,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="9dp"
         android:textColorHint="@color/white"
-        android:hint="configuración"
+        android:hint="Configuración"
         android:fontFamily="@font/intermedium"
         android:textSize="17sp"
         android:paddingTop="14dp"
