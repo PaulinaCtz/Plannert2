@@ -155,6 +155,115 @@ class Interes : Fragment() {
 
             if(busqueda==true) {
 
+                boton3.setOnClickListener {
+                    val database = Firebase.database
+                    val detalleContenidoRef = database.reference.child("detalleContenido")
+
+                    val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+                    detalleContenidoRef.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            // Obtener los datos de los registros en detalleContenido
+                            listaDetalleContenido.clear()
+                            for (registroSnapshot in dataSnapshot.children) {
+                                var registro = registroSnapshot.getValue(DetallesPeliculas::class.java)
+                                if(registro!!.categoria.equals("Accion")){
+                                    listaDetalleContenido.add(registro!!)
+                                }
+
+                            }
+                            val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,true,"no")
+                            gridView.adapter = adapter
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            // Manejar errores
+                        }
+                    })
+
+                }
+                boton1.setOnClickListener {
+                    val database = Firebase.database
+                    val detalleContenidoRef = database.reference.child("detalleContenido")
+
+                    val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+                    detalleContenidoRef.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            // Obtener los datos de los registros en detalleContenido
+                            listaDetalleContenido.clear()
+                            for (registroSnapshot in dataSnapshot.children) {
+                                var registro = registroSnapshot.getValue(DetallesPeliculas::class.java)
+                                if(registro!!.categoria.equals("Terror")){
+                                    listaDetalleContenido.add(registro!!)
+                                }
+
+                            }
+                            val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,true,"no")
+                            gridView.adapter = adapter
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            // Manejar errores
+                        }
+                    })
+
+                }
+                boton2.setOnClickListener {
+                    val database = Firebase.database
+                    val detalleContenidoRef = database.reference.child("detalleContenido")
+
+                    val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+                    detalleContenidoRef.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            // Obtener los datos de los registros en detalleContenido
+                            listaDetalleContenido.clear()
+                            for (registroSnapshot in dataSnapshot.children) {
+                                var registro = registroSnapshot.getValue(DetallesPeliculas::class.java)
+                                if(registro!!.categoria.equals("Romance")){
+                                    listaDetalleContenido.add(registro!!)
+                                }
+
+                            }
+                            val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,true,"no")
+                            gridView.adapter = adapter
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            // Manejar errores
+                        }
+                    })
+
+                }
+                boton4.setOnClickListener {
+                    val database = Firebase.database
+                    val detalleContenidoRef = database.reference.child("detalleContenido")
+
+                    val listaDetalleContenido = ArrayList<DetallesPeliculas>()
+
+                    detalleContenidoRef.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            // Obtener los datos de los registros en detalleContenido
+                            listaDetalleContenido.clear()
+                            for (registroSnapshot in dataSnapshot.children) {
+                                var registro = registroSnapshot.getValue(DetallesPeliculas::class.java)
+                                if(registro!!.categoria.equals("Sci-Fi")){
+                                    listaDetalleContenido.add(registro!!)
+                                }
+
+                            }
+                            val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,true,"no")
+                            gridView.adapter = adapter
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            // Manejar errores
+                        }
+                    })
+
+                }
+
                 //val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, true)
                 val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, true,"no")
                 gridView.adapter = adapter
