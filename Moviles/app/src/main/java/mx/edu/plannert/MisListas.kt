@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.ImageView
@@ -25,7 +26,9 @@ class MisListas : AppCompatActivity() {
     lateinit var recientes: RecyclerView
     lateinit var listas: RecyclerView
     private var portadaAdapter1: PortadaAdapter? = null
+    private var portadaAdapter2: PortadaAdapter? = null
     private var portadas = ArrayList<Portada>()
+    private var favs = ArrayList<Portada>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,7 @@ class MisListas : AppCompatActivity() {
         favoritas = findViewById(R.id.listasFavoritas)
         recientes = findViewById(R.id.listasRecientes)
         listas = findViewById(R.id.listas)
+
         //  obtenerListaPortadas()
         val gridLayoutManager1 = GridLayoutManager(this, 4)
         val gridLayoutManager2 = GridLayoutManager(this, 4)
@@ -60,20 +64,35 @@ class MisListas : AppCompatActivity() {
                 // Aquí puedes hacer algo con la lista de portadas
                 // Configurar GridLayoutManager para los RecyclerViews
 
+                var favo: ArrayList<Portada> = ArrayList()
+
+                for (portada in portadas) {
+                    Log.d("Lista",portada.toString())
+                    // Acceder a los atributos de cada Portada
+                    if(portada.favorita==true){
+                        favo.add(portada)
+                    }
+
+                }
+
                 this@MisListas.portadas.clear()
                 this@MisListas.portadas.addAll(portadas)
+                this@MisListas.favs.clear()
+                if (favo != null) {
+                    this@MisListas.favs.addAll(favo)
+                }
 
                 // Inicializar y asignar adaptadores a los RecyclerViews
                 portadaAdapter1 = PortadaAdapter(portadas)
+                portadaAdapter2 = PortadaAdapter(favo)
 
-                favoritas.adapter = portadaAdapter1
+                favoritas.adapter = portadaAdapter2
                 recientes.adapter = portadaAdapter1
                 listas.adapter = portadaAdapter1
             }
         })
-
-
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -93,6 +112,7 @@ class MisListas : AppCompatActivity() {
         val databaseReferenceListas = database.getReference("listas")
 
         val portadas = ArrayList<Portada>()
+        val favoritass = ArrayList<Portada>()
 
         val auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
@@ -127,55 +147,63 @@ class MisListas : AppCompatActivity() {
                                     val tipo = registroSnapshot.child("tipo").getValue(String::class.java)
                                     val usuario = registroSnapshot.child("idUsuario").getValue(String::class.java)
 
-
-
-
                                     if(usuarioKey==usuario) {
-                                        if (icono == "icono1") {
-                                            val nombreLista = nombre ?: ""
-                                            portadas.add(
-                                                Portada(
-                                                    R.drawable.portadalistados,
-                                                    nombreLista
+
+                                            if (icono == "icono1") {
+                                                val nombreLista = nombre ?: ""
+                                                var favorita = favorita?:false
+                                                portadas.add(
+                                                    Portada(
+                                                        R.drawable.portadalistados,
+                                                        nombreLista,
+                                                        favorita
+                                                    )
                                                 )
-                                            )
                                         }
                                         if (icono == "icono2") {
-                                            val nombreLista = nombre ?: ""
-                                            portadas.add(
-                                                Portada(
-                                                    R.drawable.portadalistatres,
-                                                    nombreLista
+
+                                                val nombreLista = nombre ?: ""
+                                            var favorita = favorita?:false
+                                                portadas.add(
+                                                    Portada(
+                                                        R.drawable.portadalistatres,
+                                                        nombreLista,favorita
+                                                    )
                                                 )
-                                            )
+
                                         }
                                         if (icono == "icono3") {
-                                            val nombreLista = nombre ?: ""
-                                            portadas.add(
-                                                Portada(
-                                                    R.drawable.portadalistauno,
-                                                    nombreLista
+
+                                                val nombreLista = nombre ?: ""
+                                            var favorita = favorita?:false
+                                                portadas.add(
+                                                    Portada(
+                                                        R.drawable.portadalistauno,
+                                                        nombreLista,favorita
+                                                    )
                                                 )
-                                            )
+
+
                                         }
                                         if (icono == "icono4") {
-                                            val nombreLista = nombre ?: ""
-                                            portadas.add(
-                                                Portada(
-                                                    R.drawable.portadalistacuatro,
-                                                    nombreLista
+
+                                                val nombreLista = nombre ?: ""
+                                            var favorita = favorita?:false
+                                                portadas.add(
+                                                    Portada(
+                                                        R.drawable.portadalistacuatro,
+                                                        nombreLista,favorita
+                                                    )
                                                 )
-                                            )
+
                                         }
                                     }
 
 
                                     // Manejar los datos obtenidos del registro
                                 }
-
                                 callback.onListaPortadasObtenida(portadas)
                             }
-
                             override fun onCancelled(error: DatabaseError) {
                                 // Manejar el error si lo hay
                             }
@@ -193,9 +221,6 @@ class MisListas : AppCompatActivity() {
         }
 
     }
-
-
-
     class PortadaAdapter(private val listas: List<Portada>) :
         RecyclerView.Adapter<PortadaAdapter.PortadaViewHolder>() {
 
@@ -227,11 +252,6 @@ class MisListas : AppCompatActivity() {
                 val inflater = MenuInflater(context)
                 inflater.inflate(R.menu.menu_portada, menu)
                 setMenuBackground()
-                menu?.findItem(R.id.opcion_favoritos)?.setOnMenuItemClickListener {
-                    // Lógica para la opción "Agregar a favoritos"
-                    true
-                }
-
                 menu?.findItem(R.id.opcion_cambiarNombre)?.setOnMenuItemClickListener {
                     val alertDialogBuilder = AlertDialog.Builder(itemView.context)
                     alertDialogBuilder.setTitle("Cambiar nombre de la lista")
@@ -283,6 +303,7 @@ class MisListas : AppCompatActivity() {
                     true
                 }
 
+
                 menu?.findItem(R.id.opcion_eliminar)?.setOnMenuItemClickListener {
                     // Lógica para la opción "Eliminar"
                     val alertDialogBuilder = AlertDialog.Builder(itemView.context)
@@ -304,6 +325,46 @@ class MisListas : AppCompatActivity() {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 for (registroSnapshot in dataSnapshot.children) {
                                     registroSnapshot.ref.removeValue()
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                // Manejar el error si lo hay
+                            }
+                        })
+
+                        dialog.dismiss()
+                    }
+                    alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
+
+                    true
+                }
+                menu?.findItem(R.id.opcion_favoritos)?.setOnMenuItemClickListener {
+                    // Lógica para la opción "Eliminar"
+                    val alertDialogBuilder = AlertDialog.Builder(itemView.context)
+                    alertDialogBuilder.setTitle("Agregar a favoritas")
+                    alertDialogBuilder.setMessage("¿Estás seguro de que deseas agregar esta lista a favoritos?")
+                    alertDialogBuilder.setPositiveButton("Sí") { dialog, _ ->
+                        // Obtener la posición del elemento en el RecyclerView
+                        val position = adapterPosition
+
+                        // Obtener el nombre de la lista que se va a eliminar
+                        val nombreLista = listas[position].nombre
+
+                        // Eliminar el registro de la base de datos
+                        val database = FirebaseDatabase.getInstance()
+                        val databaseReference = database.getReference("listas")
+
+                        // Consultar y eliminar el registro con el nombre de la lista
+                        databaseReference.orderByChild("nombre").equalTo(nombreLista).addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (registroSnapshot in dataSnapshot.children) {
+                                    val favorita = registroSnapshot.ref.child("favorita")
+                                    favorita.ref.setValue(true)
                                 }
                             }
 
