@@ -107,22 +107,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cerrar sesión"
-            android:layout_gravity="center"
-            android:textColor="@color/gris"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/intermedium"
-            android:layout_marginLeft="45dp"/>
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/icon"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="145dp"
+            android:layout_marginLeft="270dp"
             />
 
     </LinearLayout>
