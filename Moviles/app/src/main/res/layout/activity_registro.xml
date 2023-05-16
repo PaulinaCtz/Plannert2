@@ -45,7 +45,7 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:textColorHint="@color/gris"
-        android:hint="     Usuario"
+        android:hint="     Nombre"
         android:background="@drawable/customedittext"
         android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
         />
