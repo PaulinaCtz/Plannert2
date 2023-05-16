@@ -188,7 +188,9 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
 
                     val contenidos: ArrayList<DetallesPeliculas> =
                         ArrayList(listaDetalleContenido.get(0).contenidos)
-                    Toast.makeText(context, listaSeleccionada.usuario, Toast.LENGTH_SHORT).show()
+
+
+
 
                     //comparar con el id de la lista seleccionada
                     contenidos.add(contenido)
@@ -262,41 +264,40 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
 
         listaReferencia.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val registro = dataSnapshot.children.firstOrNull()
-
-                if (registro != null) {
+                dataSnapshot.children.forEach { registro ->
                     val lista = registro.getValue(Lista::class.java)
-                    val listaContenidos = lista?.contenidos
 
-                    if (listaContenidos != null) {
-                        val contenidoExistente = listaContenidos.find { it.titulo == contenido.titulo }
+                    if (lista?.nombre == listaSeleccionada.nombre) {
+                        val listaContenidos = lista.contenidos
 
-                        if (contenidoExistente == null) {
-                            listaContenidos.add(contenido)
+                        if (listaContenidos != null) {
+                            val contenidoExistente = listaContenidos.find { it.titulo == contenido.titulo }
 
-                            registro.ref.child("contenidos").setValue(listaContenidos)
-                                .addOnCompleteListener {
-                                    Toast.makeText(
-                                        context,
-                                        "Contenido agregado a la lista",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                                .addOnFailureListener {
-                                    Toast.makeText(
-                                        context,
-                                        "Error al agregar contenido a la lista",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+                            if (contenidoExistente == null) {
+                                listaContenidos.add(contenido)
+
+                                registro.ref.child("contenidos").setValue(listaContenidos)
+                                    .addOnCompleteListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Contenido agregado a la lista",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Error al agregar contenido a la lista",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                            } else {
+                                // Toast.makeText(context, "El contenido ya está en la lista", Toast.LENGTH_SHORT).show()
+                            }
                         } else {
-                            // Toast.makeText(context, "El contenido ya está en la lista", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "No se encontraron contenidos en la lista", Toast.LENGTH_SHORT).show()
                         }
-                    } else {
-                        Toast.makeText(context, "No se encontraron contenidos en la lista", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(context, "No se encontró la lista en la base de datos", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -305,7 +306,6 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
             }
         })
     }
-
 
 
 
