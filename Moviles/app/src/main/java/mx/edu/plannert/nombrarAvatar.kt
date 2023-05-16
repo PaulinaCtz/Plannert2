@@ -100,7 +100,7 @@ class nombrarAvatar : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val etNombreUsuario = view.findViewById<EditText>(R.id.etNombreUsuario)
-
+/*
         view.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 val nombreUsuario = etNombreUsuario.text.toString().trim()
@@ -114,7 +114,7 @@ class nombrarAvatar : Fragment() {
                 return@setOnTouchListener true
             }
             return@setOnTouchListener false
-        }
+        }*/
     }
 
     private fun guardarNombreUsuario(nombreUsuario: String) {

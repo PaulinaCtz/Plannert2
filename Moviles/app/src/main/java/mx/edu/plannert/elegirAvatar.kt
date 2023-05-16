@@ -66,15 +66,16 @@ class elegirAvatar : Fragment() {
 
                                     interesesContenidoMap["Avatar"] =selectedOption
 
+
                                 usuarioActualRef.updateChildren(
                                     interesesContenidoMap
                                 )
                                     .addOnSuccessListener {
-                                        Toast.makeText(
+                                       /* Toast.makeText(
                                             context,
                                             "Elementos guardado exitosamente",
                                             Toast.LENGTH_SHORT
-                                        ).show()
+                                        ).show()*/
 
 
                                     }

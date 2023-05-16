@@ -102,11 +102,7 @@ class PeliculaAdapter(private val context: Context, private val contenidos: Arra
                                                     interesesContenidoMap
                                                 )
                                                     .addOnSuccessListener {
-                                                        Toast.makeText(
-                                                            context,
-                                                            "Elementos guardado exitosamente",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
+
 
 
                                                     }

@@ -269,7 +269,7 @@ class Interes : Fragment() {
                 gridView.adapter = adapter
             }else{
 
-                Toast.makeText(context, "Elemento guardado exitosamente", Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(context, "Elemento guardado exitosamente", Toast.LENGTH_SHORT).show()
 
                 if (sub == "Peliculas") {
                     val adapter = PeliculaAdapter(requireContext(),imagenes,false,"Peliculas")
