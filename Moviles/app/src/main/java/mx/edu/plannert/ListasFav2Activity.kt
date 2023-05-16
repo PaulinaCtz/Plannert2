@@ -9,14 +9,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 
 class ListasFav2Activity : AppCompatActivity() {
     private lateinit var adapter: ContenidosAdapter
+    private lateinit var listaRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +34,10 @@ class ListasFav2Activity : AppCompatActivity() {
         val tv_TituloLista = findViewById<TextView>(R.id.tv_tituloLista)
         tv_TituloLista.text = nombre
 
-        adapter = contenidos?.let { ContenidosAdapter(this, it) }!!
+        // Obtén la referencia de la lista en Firebase
+        listaRef = FirebaseDatabase.getInstance().getReference("listas")
+
+        adapter = contenidos?.let { ContenidosAdapter(this, listaRef, it) }!!
         gridview.adapter = adapter
 
         gridview.setOnItemClickListener { parent, view, position, id ->
@@ -72,15 +73,13 @@ class ListasFav2Activity : AppCompatActivity() {
                 val nombre = intent.getStringExtra("nombre")
 
                 if (nombreContenido.isNotEmpty()) {
-                    val databaseReference = FirebaseDatabase.getInstance().getReference("listas") // Reemplaza con el nombre del nodo en tu base de datos
-
-                    val query = databaseReference.orderByChild("nombre").equalTo(nombre) // Consulta para obtener la lista con el nombre específico
+                    val query = listaRef.orderByChild("nombre").equalTo(nombre) // Consulta para obtener la lista con el nombre específico
 
                     query.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             for (snapshot in dataSnapshot.children) {
                                 val listaId = snapshot.key // Obtén la clave de la lista
-                                val listaRef = databaseReference.child(listaId!!) // Obtiene la referencia a la lista específica
+                                val listaRef = listaRef.child(listaId!!) // Obtiene la referencia a la lista específica
 
                                 listaRef.child("contenidos").addListenerForSingleValueEvent(object : ValueEventListener {
                                     override fun onDataChange(contenidoSnapshot: DataSnapshot) {
@@ -90,7 +89,7 @@ class ListasFav2Activity : AppCompatActivity() {
 
                                             // Verifica si el contenido coincide con el seleccionado
                                             if (contenido != null && contenido.titulo == nombreContenido) {
-                                                listaRef.child("contenidos").child(contenidoId!!).removeValue() // Elimina el contenido del arreglo en Firebase
+                                                listaRef.child("contenidos").child(contenidoId!!).removeValue()
                                                 adapter.removeContenido(selectedPosition)
                                                 break // Finaliza el bucle si se encuentra y elimina el contenido
                                             }
@@ -120,7 +119,7 @@ class ListasFav2Activity : AppCompatActivity() {
     }
 }
 
-class ContenidosAdapter(private val context: Context, private var contenidos: ArrayList<DetallesPeliculas>) : BaseAdapter() {
+class ContenidosAdapter(private val context: Context, private val listaRef: DatabaseReference, private var contenidos: ArrayList<DetallesPeliculas>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val imageView = ImageView(context)
         Picasso.get().load(contenidos[position].urlImagen).into(imageView)
@@ -150,6 +149,8 @@ class ContenidosAdapter(private val context: Context, private var contenidos: Ar
         notifyDataSetChanged()
     }
 }
+
+
 
 
 

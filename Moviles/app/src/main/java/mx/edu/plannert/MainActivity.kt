@@ -3,6 +3,7 @@ package mx.edu.plannert
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputFilter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 
         val emailET: EditText = findViewById(R.id.txt_emailInicio)
         val pswET: EditText = findViewById(R.id.txt_contraseñaInicio)
+
+        limitEditTextLength(emailET, 40)
+        limitEditTextLength(pswET, 25)
 
         registro.setOnClickListener {
             val intent = Intent(this, Registro::class.java)
@@ -174,6 +178,10 @@ class MainActivity : AppCompatActivity() {
             sb.append(caracteres[index])
         }
         return sb.toString()
+    }
+
+    private fun limitEditTextLength(editText: EditText, maxLength: Int) {
+        editText.filters = arrayOf(InputFilter.LengthFilter(maxLength))
     }
 }
 

@@ -130,7 +130,7 @@ class MenuPersonalNombre : Fragment() {
             }
 
             override fun getAcceptedChars(): CharArray {
-                return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
+                return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".toCharArray()
             }
         }
     }
