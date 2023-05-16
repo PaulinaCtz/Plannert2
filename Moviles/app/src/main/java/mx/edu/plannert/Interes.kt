@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.RadioButton
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -155,15 +156,22 @@ class Interes : Fragment() {
             if(busqueda==true) {
 
                 //val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, true)
-                val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, true)
+                val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, true,"no")
                 gridView.adapter = adapter
             }else{
 
+                Toast.makeText(context, "Elemento guardado exitosamente", Toast.LENGTH_SHORT).show()
 
-
-                val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, false)
-                gridView.adapter = adapter
+                if (sub == "Peliculas") {
+                    val adapter = PeliculaAdapter(requireContext(),imagenes,false,"Peliculas")
+                    gridView.adapter = adapter
+                } else if (sub == "Plataformas") {
+                    val adapter = PeliculaAdapter(requireContext(), imagenes,false,"Plataformas")
+                    gridView.adapter = adapter}
             }
+               // val adapter = PeliculaAdapter(requireContext(), imagenes as ArrayList<DetallesPeliculas>, false,"no")
+               // gridView.adapter = adapter
+
 
         }else{
             /*
@@ -207,11 +215,18 @@ class Interes : Fragment() {
 
 
             if(busqueda==true){
-                val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,true)
+                val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,true,"no")
                 gridView.adapter = adapter
             }else{
-            val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,false)
-            gridView.adapter = adapter}
+                if (sub == "Peliculas") {
+                    val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,false,"Peliculas")
+                    gridView.adapter = adapter
+                } else if (sub == "Plataformas") {
+                    val adapter = PeliculaAdapter(requireContext(), listaDetalleContenido,false,"Plataformas")
+                      gridView.adapter = adapter}
+                }
+
+
         }
 
 

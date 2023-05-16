@@ -5,6 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +42,64 @@ class elegirAvatar : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_elegir_avatar, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_elegir_avatar, container, false)
+
+        val radioGroup = rootView.findViewById<RadioGroup>(R.id.radioGroupIconos)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val radioButton = group.findViewById<RadioButton>(checkedId)
+            val selectedOption = radioButton.tag.toString()
+            // Aquí puedes hacer lo que necesites con la opción seleccionada
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            val userEmail = currentUser?.email
+
+            if (userEmail != null) {
+                val database = FirebaseDatabase.getInstance()
+                val usuariosRef = database.getReference("usuarios")
+
+                usuariosRef.orderByChild("email").equalTo(userEmail)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            for (snapshot in dataSnapshot.children) {
+                                val usuarioActualRef = snapshot.ref
+
+                                val interesesContenidoMap = HashMap<String, Any>()
+
+                                    interesesContenidoMap["Avatar"] =selectedOption
+
+                                usuarioActualRef.updateChildren(
+                                    interesesContenidoMap
+                                )
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Elementos guardado exitosamente",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Error al guardar el elemento",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                            }
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            Toast.makeText(
+                                context,
+                                "Error al buscar el usuario",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+            }
+        }
+
+        return rootView
     }
 
     companion object {

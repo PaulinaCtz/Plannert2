@@ -14,7 +14,10 @@ class InicioListas : AppCompatActivity() {
         val button = findViewById<Button>(R.id.btnInicioLista)
         val masTarde:TextView=findViewById(R.id.masTardeInicioListas)
         button.setOnClickListener {
-            val intent = Intent(this, CrearLista::class.java)
+          //  val intent = Intent(this, CrearLista::class.java)
+           // startActivity(intent)
+
+            val intent = Intent(this, ListasNuevas::class.java)
             startActivity(intent)
         }
 

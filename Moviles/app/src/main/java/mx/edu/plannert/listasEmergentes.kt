@@ -188,9 +188,9 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
 
                     val contenidos: ArrayList<DetallesPeliculas> =
                         ArrayList(listaDetalleContenido.get(0).contenidos)
+                    Toast.makeText(context, listaSeleccionada.usuario, Toast.LENGTH_SHORT).show()
 
-
-
+                    //comparar con el id de la lista seleccionada
                     contenidos.add(contenido)
                     actualizarLista(contenidos, listaSeleccionada, context,contenido)
 
@@ -206,21 +206,44 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
 
     //AQUI TERMINA
     fun obtenerLista(contenido: Lista, callback: (ArrayList<Lista>) -> Unit) {
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+
         val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val listasRef: DatabaseReference = database.getReference("listas")
         val listaDetalleContenido = ArrayList<Lista>()
 
-        val query = listasRef.orderByChild("nombre").equalTo(contenido.nombre)
+        // Consultar el usuario que coincida con el email actual
+        val usuariosRef: DatabaseReference = database.getReference("usuarios")
+        val queryUsuario = usuariosRef.orderByChild("email").equalTo(currentUser?.email)
 
-        query.addValueEventListener(object : ValueEventListener {
+        queryUsuario.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                listaDetalleContenido.clear()
-                for (registroSnapshot in dataSnapshot.children) {
-                    val registro = registroSnapshot.getValue(Lista::class.java)
-                    registro?.let { listaDetalleContenido.add(it) }
-                }
-                // Llamar al callback con la lista actualizada
-                callback(listaDetalleContenido)
+                val usuarioSnapshot = dataSnapshot.children.firstOrNull()
+                val usuarioKey = usuarioSnapshot?.key
+
+                // Obtener la lista que coincida con el nombre
+                val queryLista = listasRef.orderByChild("nombre").equalTo(contenido.nombre)
+
+                queryLista.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        listaDetalleContenido.clear()
+                        for (registroSnapshot in dataSnapshot.children) {
+                            val registro = registroSnapshot.getValue(Lista::class.java)
+                            registro?.let {
+                                if (it.idUsuario == usuarioKey) {
+                                    listaDetalleContenido.add(it)
+                                }
+                            }
+                        }
+                        // Llamar al callback con la lista actualizada
+                        callback(listaDetalleContenido)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // Manejar errores
+                    }
+                })
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -234,12 +257,11 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
         val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val listasRef: DatabaseReference = database.getReference("listas")
 
-        val listaReferencia = listasRef.orderByChild("nombre")
-            .equalTo(listaSeleccionada.nombre)
+        val listaReferencia = listasRef.orderByChild("idUsuario")
+            .equalTo(listaSeleccionada.idUsuario)
 
         listaReferencia.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 val registro = dataSnapshot.children.firstOrNull()
 
                 if (registro != null) {
@@ -247,13 +269,10 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
                     val listaContenidos = lista?.contenidos
 
                     if (listaContenidos != null) {
-
                         val contenidoExistente = listaContenidos.find { it.titulo == contenido.titulo }
 
                         if (contenidoExistente == null) {
-
                             listaContenidos.add(contenido)
-
 
                             registro.ref.child("contenidos").setValue(listaContenidos)
                                 .addOnCompleteListener {
@@ -271,7 +290,7 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
                                     ).show()
                                 }
                         } else {
-                          //  Toast.makeText(context, "El contenido ya está en la lista", Toast.LENGTH_SHORT).show()
+                            // Toast.makeText(context, "El contenido ya está en la lista", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(context, "No se encontraron contenidos en la lista", Toast.LENGTH_SHORT).show()
@@ -286,6 +305,7 @@ class BotonesAdapter(private val context: Context, private val botones: ArrayLis
             }
         })
     }
+
 
 
 

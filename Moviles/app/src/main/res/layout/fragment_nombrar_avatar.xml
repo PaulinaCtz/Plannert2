@@ -34,4 +34,13 @@
         android:background="@drawable/customedittext"
         android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
         />
+
+    <Button
+        android:id="@+id/btnGuardarUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Guardad"
+        android:layout_marginTop="20dp"
+        />
 </LinearLayout>

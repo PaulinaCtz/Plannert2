@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -35,8 +36,64 @@ class nombrarAvatar : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_nombrar_avatar, container, false)
-        return view
+        val rootView = inflater.inflate(R.layout.fragment_nombrar_avatar, container, false)
+        val btnGuardarUsername = rootView.findViewById<Button>(R.id.btnGuardarUsername)
+        val username = rootView.findViewById<TextView>(R.id.etNombreUsuario)
+        btnGuardarUsername.setOnClickListener {
+            if(username.text.toString().trim().isEmpty()){
+                Toast.makeText(requireContext(), "Por favor, ingrese un nombre de usuario", Toast.LENGTH_SHORT).show()
+            }else{
+                val currentUser = FirebaseAuth.getInstance().currentUser
+                val userEmail = currentUser?.email
+
+                if (userEmail != null) {
+                    val database = FirebaseDatabase.getInstance()
+                    val usuariosRef = database.getReference("usuarios")
+
+                    usuariosRef.orderByChild("email").equalTo(userEmail)
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (snapshot in dataSnapshot.children) {
+                                    val usuarioActualRef = snapshot.ref
+
+                                    val interesesContenidoMap = HashMap<String, Any>()
+
+                                    interesesContenidoMap["usuario"] =username.text.toString().trim()
+
+                                    usuarioActualRef.updateChildren(
+                                        interesesContenidoMap
+                                    )
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                context,
+                                                "Elementos guardado exitosamente",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+
+
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(
+                                                context,
+                                                "Error al guardar el elemento",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                }
+                            }
+
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                Toast.makeText(
+                                    context,
+                                    "Error al buscar el usuario",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        })
+                }
+            }
+        }
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

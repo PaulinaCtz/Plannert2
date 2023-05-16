@@ -137,67 +137,73 @@ class ListasNuevas : AppCompatActivity() {
 
     }
 
-    private fun guardarLista(icono: String, nombre: String, tipo: String,categoria:String) {
-
+    private fun guardarLista(icono: String, nombre: String, tipo: String, categoria: String) {
         val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val usuariosRef: DatabaseReference = database.getReference("usuarios")
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
         databaseReference = FirebaseDatabase.getInstance().reference
-
-
-
-
         val currentUser = auth.currentUser
+
         if (currentUser != null) {
             val email = currentUser.email
 
-            usuariosRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object :
-                ValueEventListener {
+            usuariosRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var listaExiste = false
+
                     for (usuarioSnapshot in dataSnapshot.children) {
                         val usuarioKey = usuarioSnapshot.key
                         val usuario = usuarioSnapshot.getValue(Usuarios::class.java)
 
+                        val listaRef = databaseReference.child("listas")
+                        listaRef.orderByChild("idUsuario").equalTo(usuarioKey).addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                for (listaSnapshot in snapshot.children) {
+                                    val lista = listaSnapshot.getValue(Lista::class.java)
+                                    if (lista?.nombre == nombre) {
+                                        // La lista del usuario con el mismo nombre ya existe
+                                        listaExiste = true
+                                        break
+                                    }
+                                }
 
-                        // Genera una clave única para el nuevo registro en la base de datos
-                        val nuevoRegistroKey = databaseReference.child("listas").push().key
+                                if (listaExiste) {
+                                    Toast.makeText(this@ListasNuevas, "Ya existe una lista con el mismo nombre", Toast.LENGTH_SHORT).show()
+                                } else {
 
-                       // val listaContenidos = listOf<Contenidos>()
+                                    val nuevoRegistroKey = databaseReference.child("listas").push().key
 
-                        // Crea un objeto con los datos del nuevo registro(lista)
-                        val nuevoRegistro = HashMap<String, Any>()
-                        nuevoRegistro["usuario"] = usuario?.usuario.toString()
-                        nuevoRegistro["icono"] = icono
-                        nuevoRegistro["nombre"] = nombre
-                        nuevoRegistro["tipo"] = tipo
-                        nuevoRegistro["categoria"] = categoria
-                        nuevoRegistro["favorita"] = false
-                        nuevoRegistro["idUsuario"] = usuarioKey.toString()
-                      //  nuevoRegistro["contenidos"] =listaContenidos
 
-                        // Guarda el nuevo registro de la lista en la base de datos
-                        databaseReference.child("listas").child(nuevoRegistroKey!!)
-                            .setValue(nuevoRegistro)
-                            .addOnSuccessListener {
-                                Toast.makeText(this@ListasNuevas, "Lista creada con exito", Toast.LENGTH_SHORT).show()
-                                val intent = Intent(this@ListasNuevas, MisListas::class.java)
-                                startActivity(intent)
-                                this@ListasNuevas.finish()
+                                    val nuevoRegistro = HashMap<String, Any>()
+                                    nuevoRegistro["usuario"] = usuario?.usuario.toString()
+                                    nuevoRegistro["icono"] = icono
+                                    nuevoRegistro["nombre"] = nombre
+                                    nuevoRegistro["tipo"] = tipo
+                                    nuevoRegistro["categoria"] = categoria
+                                    nuevoRegistro["favorita"] = false
+                                    nuevoRegistro["idUsuario"] = usuarioKey.toString()
+
+
+                                    databaseReference.child("listas").child(nuevoRegistroKey!!)
+                                        .setValue(nuevoRegistro)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this@ListasNuevas, "Lista creada con exito", Toast.LENGTH_SHORT).show()
+                                            val intent = Intent(this@ListasNuevas, MisListas::class.java)
+                                            startActivity(intent)
+                                            this@ListasNuevas.finish()
+                                        }
+                                }
                             }
 
+                            override fun onCancelled(databaseError: DatabaseError) {
 
+                            }
+                        })
 
-
-
-
-
-
-                        // return
-
+                        if (listaExiste) {
+                            break
+                        }
                     }
-
-
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
